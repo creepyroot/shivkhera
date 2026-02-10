@@ -1,1402 +1,549 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shiv Khera - Transform Your Future with Winning Principles</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title data-id="th-modified">Shiv Khera - Transform Your Future</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+--black:#000;--dark-1:#080808;--dark-2:#0f0f0f;--dark-3:#161616;
+--dark-4:#1c1c1e;--dark-5:#2c2c2e;--dark-6:#3a3a3c;
+--grey-1:#48484a;--grey-2:#636366;--mid-grey:#6e6e73;
+--light-grey:#8e8e93;--lighter-grey:#aeaeb2;--silver:#c7c7cc;
+--off-white:#e5e5e7;--white:#f5f5f7;--pure-white:#fff;
+--gold:#c9a96e;--gold-light:#e8d5a8;--gold-dark:#8b7340;
+--gold-glow:rgba(201,169,110,.15);
+--radius-sm:12px;--radius-md:20px;--radius-lg:28px;--radius-full:100px;
+--header-height:48px
 }
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--dark-2);color:var(--white);overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased}
+::selection{background:rgba(201,169,110,.3);color:var(--pure-white)}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--dark-1)}
+::-webkit-scrollbar-thumb{background:var(--dark-5);border-radius:3px}
 
-:root {
-  --black: #000000;
-  --dark-grey-1: #0A0A0A;
-  --dark-grey-2: #1A1A1A;
-  --dark-grey-3: #2A2A2A;
-  --dark-grey-4: #3A3A3A;
-  --dark-grey-5: #4A4A4A;
-  --mid-grey: #6E6E73;
-  --light-grey: #8E8E93;
-  --lighter-grey: #C7C7CC;
-  --off-white: #E5E5E7;
-  --white: #FFFFFF;
-  --blue: #0071E3;
-  --blue-dark: #0051BA;
+.loading-screen{position:fixed;top:0;left:0;width:100%;height:100vh;background:var(--off-white);display:flex;align-items:center;justify-content:center;z-index:99999;transition:transform 1.5s cubic-bezier(.76,0,.24,1)}
+.loading-screen.slide-up{transform:translateY(-100%)}
+.loading-content{text-align:center;max-width:900px;padding:3rem}
+.loading-logo{margin-bottom:2rem}
+.loading-logo img{height:70px;filter:invert(1)}
+.loading-quote{font-family:'Playfair Display',serif;font-size:clamp(1.2rem,3vw,2rem);font-weight:600;color:var(--dark-4);font-style:italic;line-height:1.6;margin-bottom:2.5rem;min-height:5rem;transition:opacity .3s}
+.loading-progress{width:250px;height:4px;background:var(--silver);border-radius:10px;overflow:hidden;margin:0 auto 2rem}
+.loading-progress-bar{height:100%;background:linear-gradient(90deg,var(--gold-dark),var(--gold));width:0%;border-radius:10px;transition:width 6s cubic-bezier(.4,0,.2,1)}
+.loading-text{font-family:'Space Grotesk',sans-serif;font-size:.85rem;color:var(--mid-grey);letter-spacing:4px;text-transform:uppercase}
+
+.noise-overlay{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9998;opacity:.018;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-repeat:repeat;background-size:256px}
+
+.cursor-ring{width:24px;height:24px;border:1.5px solid var(--gold);border-radius:50%;position:fixed;pointer-events:none;z-index:99997;transition:transform .15s,opacity .15s;mix-blend-mode:difference}
+.cursor-dot{width:4px;height:4px;background:var(--gold);border-radius:50%;position:fixed;pointer-events:none;z-index:99998}
+@media(hover:none){.cursor-ring,.cursor-dot{display:none}}
+
+.magnetic-wrap{display:inline-block;transition:transform .3s cubic-bezier(.25,.46,.45,.94)}
+.ripple-btn{position:relative;overflow:hidden}
+.ripple-btn .ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,.3);transform:scale(0);animation:rippleAnim .6s linear;pointer-events:none}
+@keyframes rippleAnim{to{transform:scale(4);opacity:0}}
+
+.glow-card{position:relative;overflow:hidden}
+.glow-card::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:conic-gradient(from 0deg,transparent,rgba(201,169,110,.15),transparent,transparent);animation:borderRotate 4s linear infinite;opacity:0;transition:opacity .5s}
+.glow-card:hover::before{opacity:1}
+@keyframes borderRotate{to{transform:rotate(360deg)}}
+.glow-card::after{content:'';position:absolute;inset:1px;background:var(--dark-3);border-radius:inherit;z-index:0}
+.glow-card>*{position:relative;z-index:1}
+
+.spotlight{position:relative;overflow:hidden}
+.spotlight .spot{position:absolute;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(201,169,110,.08),transparent 70%);pointer-events:none;opacity:0;transition:opacity .3s}
+.spotlight:hover .spot{opacity:1}
+
+.float-anim{animation:floatY 3s ease-in-out infinite}
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+
+.gradient-border-btn{position:relative;padding:14px 32px;background:var(--dark-3);border:none;border-radius:var(--radius-full);color:var(--white);font-weight:600;font-size:.88rem;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;overflow:hidden;z-index:1;transition:all .3s}
+.gradient-border-btn::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:2px;background:linear-gradient(135deg,var(--gold),var(--gold-light),var(--gold-dark),var(--gold));-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;transition:all .3s}
+.gradient-border-btn:hover{background:rgba(201,169,110,.1);transform:translateY(-3px);box-shadow:0 12px 40px rgba(201,169,110,.15)}
+
+.aurora-bg{position:absolute;top:0;left:0;width:100%;height:100%;overflow:hidden;pointer-events:none}
+.aurora-blob{position:absolute;border-radius:50%;filter:blur(80px);mix-blend-mode:screen;animation:auroraMove 8s ease-in-out infinite alternate}
+.aurora-blob:nth-child(1){width:400px;height:400px;background:rgba(201,169,110,.06);top:-100px;left:-100px}
+.aurora-blob:nth-child(2){width:350px;height:350px;background:rgba(139,115,64,.05);bottom:-100px;right:-100px;animation-delay:2s;animation-direction:alternate-reverse}
+.aurora-blob:nth-child(3){width:300px;height:300px;background:rgba(232,213,168,.04);top:50%;left:50%;animation-delay:4s}
+@keyframes auroraMove{0%{transform:translate(0,0) scale(1)}50%{transform:translate(50px,-30px) scale(1.2)}100%{transform:translate(-30px,50px) scale(.9)}}
+
+.scroll-progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--gold-dark),var(--gold),var(--gold-light));z-index:100001;width:0%;transition:width .1s}
+
+/* ===== DYNAMIC ISLAND HEADER ===== */
+header{position:fixed;width:100%;top:0;z-index:10000;padding:.7rem 1.2rem;pointer-events:none}
+.island-row{display:flex;align-items:center;justify-content:space-between;gap:6px;pointer-events:all;width:100%;max-width:1500px;margin:0 auto}
+
+.di-island{background:rgba(14,14,14,.94);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border:1px solid rgba(201,169,110,.06);box-shadow:0 4px 24px rgba(0,0,0,.5);transition:all .4s}
+
+/* Logo Island - LEFT */
+.di-logo{border-radius:var(--radius-full);padding:0 1.4rem;flex-shrink:0;height:var(--header-height);display:flex;align-items:center}
+.di-logo a{display:flex;align-items:center}
+.di-logo img{height:26px;display:block}
+
+/* Nav Island - CENTER */
+.di-nav{border-radius:var(--radius-full);padding:0 .3rem;display:flex;align-items:center;flex:0 1 auto;justify-content:center;position:relative;margin:0 auto;height:var(--header-height)}
+
+.di-nav-item{position:relative;height:100%;display:flex;align-items:center}
+.di-nav-link{display:flex;align-items:center;gap:3px;padding:0 .65rem;color:var(--lighter-grey);text-decoration:none;font-weight:400;font-size:.76rem;transition:all .3s;white-space:nowrap;letter-spacing:.2px;cursor:pointer;border:none;background:none;font-family:inherit;border-radius:var(--radius-full);line-height:1;height:34px}
+.di-nav-link:hover{color:var(--pure-white);background:rgba(255,255,255,.05)}
+.di-nav-item.dd-open>.di-nav-link{color:var(--pure-white);background:rgba(255,255,255,.05)}
+.di-nav-arrow{font-size:.5rem;transition:transform .3s;opacity:.4;margin-left:1px}
+.di-nav-item.dd-open .di-nav-arrow{transform:rotate(180deg);opacity:1;color:var(--gold)}
+
+/* Standard Dropdown */
+.di-dropdown{position:absolute;top:100%;left:50%;transform:translateX(-50%);min-width:220px;background:rgba(18,18,18,.98);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);border:1px solid rgba(201,169,110,.1);border-radius:var(--radius-md);padding:8px;opacity:0;visibility:hidden;pointer-events:none;transition:all .3s cubic-bezier(.4,0,.2,1);box-shadow:0 20px 60px rgba(0,0,0,.7);z-index:10001}
+.di-dropdown::before{content:'';position:absolute;top:-12px;left:0;width:100%;height:12px}
+.di-nav-item.dd-open>.di-dropdown{opacity:1;visibility:visible;pointer-events:all}
+
+.dd-item{display:flex;align-items:center;gap:10px;padding:10px 14px;color:var(--lighter-grey);text-decoration:none;font-size:.8rem;border-radius:10px;transition:all .25s;font-weight:400;cursor:pointer;position:relative;z-index:10}
+.dd-item:hover{background:rgba(201,169,110,.1);color:var(--pure-white);padding-left:18px}
+.dd-icon{font-size:1rem;width:28px;height:28px;display:flex;align-items:center;justify-content:center;background:rgba(201,169,110,.08);border-radius:8px;flex-shrink:0;transition:all .3s}
+.dd-item:hover .dd-icon{background:rgba(201,169,110,.18);transform:scale(1.05)}
+.dd-text{display:flex;flex-direction:column}
+.dd-title{font-weight:500;color:var(--white);font-size:.8rem;line-height:1.2}
+.dd-desc{font-size:.62rem;color:var(--light-grey);line-height:1.3;margin-top:2px}
+.dd-divider{height:1px;background:rgba(255,255,255,.05);margin:4px 8px}
+
+/* Mega Dropdown */
+.di-mega{position:fixed;top:56px;left:50%;transform:translateX(-50%);width:780px;max-width:calc(100vw - 2rem);background:rgba(16,16,16,.98);backdrop-filter:blur(40px);-webkit-backdrop-filter:blur(40px);border:1px solid rgba(201,169,110,.1);border-radius:var(--radius-lg);padding:1.5rem;opacity:0;visibility:hidden;pointer-events:none;transition:all .35s cubic-bezier(.4,0,.2,1);box-shadow:0 30px 80px rgba(0,0,0,.7);z-index:10001}
+.di-mega::before{content:'';position:absolute;top:-14px;left:0;width:100%;height:14px}
+.di-nav-item.dd-open>.di-mega{opacity:1;visibility:visible;pointer-events:all}
+
+.mega-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.2rem}
+.mega-col-title{font-family:'Space Grotesk',sans-serif;font-size:.6rem;font-weight:600;color:var(--gold);text-transform:uppercase;letter-spacing:2.5px;margin-bottom:10px;padding:0 14px;display:flex;align-items:center;gap:6px}
+.mega-col-title::after{content:'';flex:1;height:1px;background:rgba(201,169,110,.1)}
+.mega-cta-card{background:rgba(201,169,110,.04);border:1px solid rgba(201,169,110,.1);border-radius:var(--radius-md);padding:1.2rem;display:flex;flex-direction:column;justify-content:center}
+.mega-cta-title{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--white);margin-bottom:.4rem}
+.mega-cta-desc{font-size:.72rem;color:var(--light-grey);line-height:1.5;margin-bottom:.8rem}
+.mega-cta-link{display:inline-flex;align-items:center;gap:5px;color:var(--gold);font-size:.75rem;font-weight:600;text-decoration:none;transition:all .3s;cursor:pointer}
+.mega-cta-link:hover{gap:10px;color:var(--gold-light)}
+
+/* CTA Island - RIGHT */
+.di-cta{border-radius:var(--radius-full);padding:0 .35rem 0 .8rem;display:flex;align-items:center;gap:6px;flex-shrink:0;height:var(--header-height)}
+.di-shop{color:var(--lighter-grey);text-decoration:none;font-size:.82rem;padding:.4rem;border-radius:50%;transition:all .3s;display:flex;align-items:center;justify-content:center;width:30px;height:30px}
+.di-shop:hover{color:var(--gold);background:rgba(201,169,110,.1)}
+.di-login{color:var(--lighter-grey);text-decoration:none;font-size:.72rem;font-weight:500;padding:.45rem .7rem;border-radius:var(--radius-full);transition:all .3s;white-space:nowrap}
+.di-login:hover{color:var(--pure-white);background:rgba(255,255,255,.05)}
+.di-signup{background:var(--gold);color:var(--dark-1)!important;padding:.5rem 1rem;border-radius:var(--radius-full);font-weight:600;font-size:.72rem;text-decoration:none;transition:all .3s;white-space:nowrap;letter-spacing:.3px}
+.di-signup:hover{background:var(--gold-light);transform:scale(1.03)}
+
+.di-hamburger{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.06);display:none;align-items:center;justify-content:center;cursor:pointer;border:1px solid rgba(255,255,255,.08);flex-shrink:0;transition:all .3s}
+.di-ham-lines{width:14px;height:10px;position:relative;display:flex;flex-direction:column;justify-content:space-between}
+.di-ham-lines span{display:block;width:100%;height:1.5px;background:var(--white);border-radius:2px;transition:all .3s;transform-origin:center}
+.di-hamburger.active .di-ham-lines span:nth-child(1){transform:translateY(4.25px) rotate(45deg)}
+.di-hamburger.active .di-ham-lines span:nth-child(2){opacity:0;transform:scaleX(0)}
+.di-hamburger.active .di-ham-lines span:nth-child(3){transform:translateY(-4.25px) rotate(-45deg)}
+
+@media(max-width:1280px){
+    .di-nav{display:none!important}
+    .di-hamburger{display:flex!important}
+    .di-login{display:none}
 }
-
-body {
-  font-family: 'Inter', -apple-system, sans-serif;
-  background: var(--dark-grey-2);
-  color: var(--white);
-  overflow-x: hidden;
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-/* ===== LOADING SCREEN - PURE SLIDE UP ===== */
-.loading-screen {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background: var(--off-white);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 99999;
-  transition: transform 1.5s cubic-bezier(0.76, 0, 0.24, 1);
-}
-
-.loading-screen.slide-up {
-  transform: translateY(-100%);
-}
-
-.loading-content {
-  text-align: center;
-  max-width: 900px;
-  padding: 3rem;
-}
-
-.loading-logo {
-  font-family: 'Dancing Script', cursive;
-  font-size: clamp(3.5rem, 10vw, 6rem);
-  font-weight: 700;
-  color: var(--dark-grey-2);
-  margin-bottom: 3rem;
-}
-
-.loading-quote {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(1.5rem, 3.5vw, 2.5rem);
-  font-weight: 600;
-  color: var(--dark-grey-3);
-  font-style: italic;
-  line-height: 1.6;
-  margin-bottom: 2.5rem;
-  min-height: 5rem;
-  transition: opacity 0.3s ease;
-}
-
-.loading-progress {
-  width: 250px;
-  height: 5px;
-  background: var(--lighter-grey);
-  border-radius: 10px;
-  overflow: hidden;
-  margin: 0 auto 2rem;
-}
-
-.loading-progress-bar {
-  height: 100%;
-  background: linear-gradient(90deg, var(--dark-grey-3), var(--mid-grey));
-  width: 0%;
-  border-radius: 10px;
-  transition: width 6s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.loading-text {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 1rem;
-  color: var(--mid-grey);
-  letter-spacing: 3px;
-  text-transform: uppercase;
-}
-
-/* Main Content - VISIBLE FROM START (NO OPACITY ANIMATION) */
-.main-content {
-  /* Content is fully loaded and visible behind the loader */
-  opacity: 1;
-}
-
-/* Header */
-header {
-  position: fixed;
-  width: 100%;
-  top: 0;
-  z-index: 10000;
-  padding: 1rem 1.5rem;
-  pointer-events: none;
-}
-
-.dynamic-island {
-  max-width: 400px;
-  margin: 0 auto;
-  background: rgba(26, 26, 26, 0.9);
-  backdrop-filter: blur(20px);
-  border-radius: 50px;
-  padding: 0.75rem 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  transition: all 0.5s ease;
-  pointer-events: all;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
-}
-
-.dynamic-island.expanded {
-  max-width: 900px;
-  padding: 1.2rem 2rem;
-  border-radius: 30px;
-}
-
-.logo {
-  font-family: 'Dancing Script', cursive;
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: var(--white);
-  cursor: pointer;
-  transition: all 0.3s ease;
-  flex-shrink: 0;
-}
-
-.logo:hover {
-  color: var(--blue);
-}
-
-.nav-menu {
-  display: flex;
-  gap: 2rem;
-  list-style: none;
-  opacity: 0;
-  max-width: 0;
-  overflow: hidden;
-  transition: all 0.5s ease;
-}
-
-.dynamic-island.expanded .nav-menu {
-  opacity: 1;
-  max-width: 600px;
-}
-
-.nav-menu a {
-  color: var(--lighter-grey);
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 0.9rem;
-  transition: all 0.3s ease;
-  white-space: nowrap;
-}
-
-.nav-menu a:hover {
-  color: var(--white);
-}
-
-.island-controls {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  flex-shrink: 0;
-}
-
-.get-started-btn {
-  background: var(--blue);
-  color: var(--white);
-  padding: 0.6rem 1.3rem;
-  border-radius: 50px;
-  font-weight: 600;
-  font-size: 0.8rem;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  white-space: nowrap;
-}
-
-.get-started-btn:hover {
-  background: var(--blue-dark);
-}
-
-.island-toggle {
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  flex-shrink: 0;
-}
-
-.island-toggle span {
-  width: 16px;
-  height: 2px;
-  background: var(--white);
-  position: relative;
-  display: block;
-}
-
-.island-toggle span::before,
-.island-toggle span::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: var(--white);
-  left: 0;
-}
-
-.island-toggle span::before { top: -5px; }
-.island-toggle span::after { top: 5px; }
-
-.dynamic-island.expanded .island-toggle span {
-  background: transparent;
-}
-
-.dynamic-island.expanded .island-toggle span::before {
-  top: 0;
-  transform: rotate(45deg);
-}
-
-.dynamic-island.expanded .island-toggle span::after {
-  top: 0;
-  transform: rotate(-45deg);
+@media(max-width:480px){
+    .di-signup{font-size:.65rem;padding:.45rem .85rem}
+    .di-shop{display:none}
 }
 
 /* Mobile Menu */
-.mobile-menu-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background: rgba(10, 10, 10, 0.98);
-  backdrop-filter: blur(20px);
-  z-index: 9999;
-  display: none;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-
-.mobile-menu-overlay.active {
-  display: flex;
-  opacity: 1;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-}
-
-.mobile-nav-links {
-  list-style: none;
-  text-align: center;
-}
-
-.mobile-nav-links li {
-  margin-bottom: 2rem;
-}
-
-.mobile-nav-links a {
-  font-family: 'Playfair Display', serif;
-  font-size: 2rem;
-  color: var(--white);
-  text-decoration: none;
-  font-weight: 700;
-}
-
-.mobile-cta {
-  margin-top: 3rem;
-}
-
-/* Hero */
-.hero {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 8rem 1.5rem 4rem;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.hero-badge {
-  font-family: 'Space Grotesk', sans-serif;
-  background: var(--dark-grey-3);
-  color: var(--lighter-grey);
-  padding: 0.6rem 1.5rem;
-  border-radius: 50px;
-  font-weight: 600;
-  font-size: 0.75rem;
-  margin-bottom: 1.5rem;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  border: 1px solid var(--dark-grey-5);
-}
-
-.hero h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(2.2rem, 7vw, 6rem);
-  font-weight: 900;
-  line-height: 1.1;
-  margin-bottom: 1.5rem;
-  color: var(--white);
-}
-
-.gradient-text {
-  background: linear-gradient(135deg, var(--lighter-grey), var(--mid-grey));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.hero-subtitle {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: clamp(1.1rem, 2.5vw, 2rem);
-  color: var(--light-grey);
-  margin-bottom: 1rem;
-  max-width: 700px;
-}
-
-.hero-tagline {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(1rem, 2vw, 1.3rem);
-  color: var(--lighter-grey);
-  font-style: italic;
-  margin-bottom: 2.5rem;
-}
-
-.cta-group {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-bottom: 3rem;
-}
-
-.btn {
-  padding: 1rem 2rem;
-  border-radius: 50px;
-  font-weight: 600;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.75rem;
-  transition: all 0.3s ease;
-}
-
-.btn-primary {
-  background: var(--blue);
-  color: var(--white);
-}
-
-.btn-primary:hover {
-  background: var(--blue-dark);
-  transform: translateY(-3px);
-}
-
-.btn-secondary {
-  background: var(--dark-grey-3);
-  color: var(--white);
-  border: 2px solid var(--dark-grey-5);
-}
-
-.btn-secondary:hover {
-  background: var(--dark-grey-4);
-  transform: translateY(-3px);
-}
-
-.hero-stats {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
-  max-width: 900px;
-  width: 100%;
-}
-
-.stat-box {
-  text-align: center;
-  padding: 1.5rem 1rem;
-  background: var(--dark-grey-3);
-  border-radius: 20px;
-  border: 1px solid var(--dark-grey-5);
-  transition: all 0.4s ease;
-}
-
-.stat-box:hover {
-  transform: translateY(-10px);
-  border-color: var(--blue);
-}
-
-.stat-num {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: clamp(2rem, 5vw, 3rem);
-  font-weight: 800;
-  color: var(--white);
-  display: block;
-  margin-bottom: 0.5rem;
-}
-
-.stat-label {
-  font-size: clamp(0.75rem, 2vw, 0.9rem);
-  color: var(--lighter-grey);
-}
-
-/* Featured Image */
-.featured-section {
-  padding: 4rem 1.5rem;
-  background: var(--dark-grey-1);
-}
-
-.featured-img {
-  max-width: 1200px;
-  margin: 0 auto;
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
-}
-
-.featured-img img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-/* Section */
-.section {
-  padding: 5rem 1.5rem;
-}
-
-.section-header {
-  text-align: center;
-  max-width: 800px;
-  margin: 0 auto 4rem;
-}
-
-.section-label {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: var(--lighter-grey);
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  margin-bottom: 1rem;
-}
-
-.section-title {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(2rem, 5vw, 4.5rem);
-  font-weight: 900;
-  color: var(--white);
-  margin-bottom: 1.5rem;
-}
-
-.section-description {
-  font-size: clamp(1rem, 2vw, 1.15rem);
-  color: var(--light-grey);
-  line-height: 1.7;
-}
-
-/* Grid - 3 COLUMNS */
-.grid {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-}
-
-.card {
-  background: var(--dark-grey-3);
-  padding: 2.5rem;
-  border-radius: 20px;
-  border: 1px solid var(--dark-grey-5);
-  transition: all 0.4s ease;
-}
-
-.card:hover {
-  transform: translateY(-10px);
-  border-color: var(--blue);
-  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6);
-}
-
-.card-icon {
-  font-size: 3rem;
-  margin-bottom: 1.5rem;
-  display: block;
-}
-
-.card-title {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--white);
-  margin-bottom: 1rem;
-}
-
-.card-text {
-  color: var(--light-grey);
-  line-height: 1.7;
-  margin-bottom: 1.5rem;
-}
-
-.card-features {
-  list-style: none;
-  margin-bottom: 2rem;
-}
-
-.card-features li {
-  padding: 0.75rem 0;
-  color: var(--lighter-grey);
-  font-size: 0.9rem;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  border-bottom: 1px solid var(--dark-grey-4);
-}
-
-.card-features li::before {
-  content: '✓';
-  color: var(--blue);
-  font-weight: 900;
-  font-size: 1.2rem;
-}
-
-/* Books Grid */
-.books-grid {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2.5rem;
-}
-
-.book-card {
-  background: var(--dark-grey-2);
-  border-radius: 20px;
-  overflow: hidden;
-  transition: all 0.5s ease;
-  border: 1px solid var(--dark-grey-4);
-}
-
-.book-card:hover {
-  transform: translateY(-15px);
-  box-shadow: 0 40px 90px rgba(0, 0, 0, 0.7);
-  border-color: var(--blue);
-}
-
-.book-image {
-  width: 100%;
-  height: 350px;
-  overflow: hidden;
-  position: relative;
-}
-
-.book-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.book-badge {
-  position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
-  background: var(--blue);
-  color: var(--white);
-  padding: 0.5rem 1rem;
-  border-radius: 50px;
-  font-size: 0.75rem;
-  font-weight: 700;
-}
-
-.book-content {
-  padding: 2rem;
-}
-
-.book-rating {
-  margin-bottom: 1rem;
-  font-size: 1rem;
-}
-
-.book-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.8rem;
-  font-weight: 800;
-  color: var(--white);
-  margin-bottom: 1rem;
-}
-
-.book-desc {
-  color: var(--light-grey);
-  line-height: 1.7;
-  margin-bottom: 1.5rem;
-}
-
-.book-meta {
-  display: flex;
-  gap: 1.5rem;
-  margin-bottom: 2rem;
-  font-size: 0.85rem;
-  color: var(--lighter-grey);
-  flex-wrap: wrap;
-}
-
-.meta-item strong {
-  color: var(--blue);
-}
-
-/* Testimonials Grid */
-.testimonials-grid {
-  max-width: 1400px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-}
-
-.testimonial-card {
-  background: var(--dark-grey-3);
-  padding: 2.5rem;
-  border-radius: 25px;
-  border: 1px solid var(--dark-grey-5);
-  transition: all 0.4s ease;
-  position: relative;
-}
-
-.testimonial-card::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 4px;
-  height: 0;
-  background: var(--blue);
-  transition: height 0.4s ease;
-}
-
-.testimonial-card:hover::after {
-  height: 100%;
-}
-
-.testimonial-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 30px 70px rgba(0, 113, 227, 0.3);
-  border-color: var(--blue);
-}
-
-.quote-icon {
-  font-size: 2.5rem;
-  color: var(--dark-grey-5);
-  margin-bottom: 1.5rem;
-  font-family: 'Playfair Display', serif;
-}
-
-.testimonial-text {
-  font-size: 1.1rem;
-  color: var(--lighter-grey);
-  line-height: 1.8;
-  margin-bottom: 2rem;
-  font-style: italic;
-}
-
-.author-section {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.author-img {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background: var(--dark-grey-5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.3rem;
-  font-weight: 900;
-  color: var(--white);
-  border: 2px solid var(--dark-grey-5);
-  flex-shrink: 0;
-}
-
-.author-info h4 {
-  font-size: 1.1rem;
-  color: var(--white);
-  font-weight: 700;
-}
-
-.author-info p {
-  font-size: 0.9rem;
-  color: var(--light-grey);
-}
-
-/* CTA Section */
-.cta-section {
-  padding: 6rem 1.5rem;
-  background: linear-gradient(135deg, var(--dark-grey-3), var(--black));
-  text-align: center;
-}
-
-.cta-content h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(2.5rem, 6vw, 5.5rem);
-  font-weight: 900;
-  margin-bottom: 1.5rem;
-}
-
-.cta-content p {
-  font-size: clamp(1.1rem, 3vw, 1.5rem);
-  color: var(--lighter-grey);
-  margin-bottom: 2.5rem;
-}
-
-.cta-btn-large {
-  background: var(--blue);
-  color: var(--white);
-  padding: 1.3rem 3rem;
-  font-size: 1.2rem;
-  border-radius: 50px;
-  text-decoration: none;
-  display: inline-block;
-  font-weight: 700;
-  transition: all 0.4s ease;
-}
-
-.cta-btn-large:hover {
-  background: var(--blue-dark);
-  transform: translateY(-5px);
-}
-
-/* Footer */
-footer {
-  background: var(--black);
-  padding: 4rem 1.5rem 2rem;
-  color: var(--mid-grey);
-}
-
-.footer-grid {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 3rem;
-  margin-bottom: 3rem;
-}
-
-.footer-section h4 {
-  color: var(--white);
-  margin-bottom: 1.5rem;
-  font-weight: 700;
-}
-
-.footer-links {
-  list-style: none;
-}
-
-.footer-links li {
-  margin-bottom: 1rem;
-}
-
-.footer-links a {
-  color: var(--light-grey);
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-
-.footer-links a:hover {
-  color: var(--white);
-}
-
-.footer-bottom {
-  text-align: center;
-  padding-top: 2rem;
-  border-top: 1px solid var(--dark-grey-4);
-}
-
-/* Mobile */
-@media (max-width: 1024px) {
-  .grid, .books-grid, .testimonials-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .nav-menu {
-    display: none;
-  }
-}
-
-@media (max-width: 768px) {
-  .grid, .books-grid, .testimonials-grid {
-    grid-template-columns: 1fr;
-  }
-  .hero-stats {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .footer-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
+.mobile-fullmenu{position:fixed;top:0;left:0;width:100%;height:100vh;background:rgba(8,8,8,.99);backdrop-filter:blur(40px);z-index:9999;display:none;opacity:0;transition:opacity .4s;overflow-y:auto;padding:80px 1.5rem 2rem}
+.mobile-fullmenu.active{display:block;opacity:1}
+.mob-nav-list{list-style:none;max-width:600px;margin:0 auto}
+.mob-nav-item{border-bottom:1px solid rgba(255,255,255,.04)}
+.mob-nav-link{display:flex;align-items:center;justify-content:space-between;padding:16px 0;color:var(--white);text-decoration:none;font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:600;transition:color .3s;cursor:pointer}
+.mob-nav-link:hover{color:var(--gold)}
+.mob-nav-arrow{font-size:.7rem;color:var(--light-grey);transition:transform .3s}
+.mob-nav-item.open .mob-nav-arrow{transform:rotate(180deg);color:var(--gold)}
+.mob-sub{list-style:none;max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.4,0,.2,1);padding-left:1rem}
+.mob-nav-item.open .mob-sub{max-height:600px}
+.mob-sub-link{display:flex;align-items:center;gap:10px;padding:10px 0;color:var(--lighter-grey);text-decoration:none;font-size:.9rem;font-family:'Inter',sans-serif;font-weight:400;transition:all .3s}
+.mob-sub-link:hover{color:var(--gold);transform:translateX(6px)}
+.mob-sub-link .mob-icon{font-size:1rem;width:28px;text-align:center}
+.mob-sub-divider{height:1px;background:rgba(255,255,255,.03);margin:4px 0}
+.mob-bottom{max-width:600px;margin:2rem auto 0;display:flex;flex-direction:column;gap:12px}
+.mob-auth-row{display:flex;gap:10px;width:100%}
+.mob-auth-row .btn{flex:1;justify-content:center}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0;position:relative;overflow:hidden}
+.hero-video-bg{position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;overflow:hidden}
+.hero-video-bg iframe{position:absolute;top:50%;left:50%;width:300vw;height:300vh;transform:translate(-50%,-50%);pointer-events:none}
+.hero-video-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(180deg,rgba(0,0,0,.35) 0%,rgba(0,0,0,.25) 30%,rgba(0,0,0,.3) 60%,rgba(0,0,0,.7) 85%,rgba(15,15,15,.95) 100%);z-index:1}
+.hero-video-overlay2{position:absolute;top:0;left:0;width:100%;height:100%;background:radial-gradient(ellipse at center,transparent 50%,rgba(0,0,0,.3) 100%);z-index:2}
+.hero-content-wrap{position:relative;z-index:10;max-width:900px;width:100%;padding:0 2rem;padding-top:70px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.hero-particles{position:absolute;top:0;left:0;width:100%;height:100%;overflow:hidden;pointer-events:none;z-index:3}
+.particle{position:absolute;width:2px;height:2px;background:var(--gold);border-radius:50%;opacity:0;animation:particleFloat 8s ease-in-out infinite}
+@keyframes particleFloat{0%{opacity:0;transform:translateY(100vh) scale(0)}20%{opacity:.5}80%{opacity:.2}100%{opacity:0;transform:translateY(-100px) scale(1)}}
+
+.hero-badge{font-family:'Space Grotesk',sans-serif;display:inline-flex;align-items:center;gap:8px;background:rgba(201,169,110,.1);color:var(--gold-light);padding:.5rem 1.3rem;border-radius:var(--radius-full);font-weight:500;font-size:.68rem;margin-bottom:1.8rem;letter-spacing:2px;text-transform:uppercase;border:1px solid rgba(201,169,110,.2);opacity:0;animation:fadeUp .8s ease forwards .2s;text-align:center;line-height:1.4}
+.badge-dot{width:6px;height:6px;background:var(--gold);border-radius:50%;animation:dotPulse 2s ease-in-out infinite;flex-shrink:0}
+@keyframes dotPulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(201,169,110,.4)}50%{opacity:.3;box-shadow:0 0 0 8px rgba(201,169,110,0)}}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4.5vw,3.4rem);font-weight:700;line-height:1.15;margin-bottom:1.5rem;opacity:0;animation:fadeUp .8s ease forwards .4s;letter-spacing:-.5px;text-shadow:0 4px 30px rgba(0,0,0,.5)}
+.gold-text{background:linear-gradient(135deg,var(--gold),var(--gold-light),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-style:italic}
+.hero h1 sup{font-size:.32em;vertical-align:super;-webkit-text-fill-color:var(--gold-light);font-style:normal;font-weight:400}
+.hero-subtitle{font-size:clamp(.88rem,1.5vw,1.02rem);color:rgba(245,245,247,.75);margin-bottom:.8rem;max-width:560px;line-height:1.8;opacity:0;animation:fadeUp .8s ease forwards .6s;text-align:center}
+.hero-tagline{font-family:'Playfair Display',serif;font-size:clamp(.82rem,1.2vw,.95rem);color:var(--gold-light);font-style:italic;margin-bottom:2rem;opacity:0;animation:fadeUp .8s ease forwards .8s;text-shadow:0 2px 15px rgba(0,0,0,.4)}
+.cta-group{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:3rem;opacity:0;animation:fadeUp .8s ease forwards 1s}
+.btn{padding:.8rem 1.8rem;border-radius:var(--radius-full);font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:.6rem;transition:all .4s cubic-bezier(.4,0,.2,1);font-size:.85rem;letter-spacing:.3px;position:relative;overflow:hidden;border:none;cursor:pointer}
+.btn::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.12),transparent);transition:left .5s}
+.btn:hover::before{left:100%}
+.btn-gold{background:var(--gold);color:var(--dark-1)}
+.btn-gold:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(201,169,110,.3)}
+.btn-outline{background:rgba(255,255,255,.06);color:var(--white);border:1px solid rgba(255,255,255,.15);backdrop-filter:blur(10px)}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-3px);background:rgba(201,169,110,.06)}
+
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;max-width:700px;width:100%;opacity:0;animation:fadeUp .8s ease forwards 1.2s}
+.stat-box{text-align:center;padding:1rem .6rem;background:rgba(255,255,255,.04);border-radius:var(--radius-md);border:1px solid rgba(255,255,255,.06);transition:all .4s;backdrop-filter:blur(15px)}
+.stat-box:hover{transform:translateY(-6px);border-color:rgba(201,169,110,.2);box-shadow:0 16px 48px rgba(0,0,0,.4);background:rgba(201,169,110,.06)}
+.stat-num{font-family:'Playfair Display',serif;font-size:clamp(1.4rem,3vw,1.9rem);font-weight:700;background:linear-gradient(135deg,var(--gold),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block;margin-bottom:.2rem}
+.stat-label{font-size:clamp(.6rem,1vw,.72rem);color:rgba(255,255,255,.5);letter-spacing:.5px}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+
+.marquee-section{padding:28px 0;border-top:1px solid rgba(201,169,110,.04);border-bottom:1px solid rgba(201,169,110,.04);background:rgba(201,169,110,.01);overflow:hidden}
+.marquee-track{display:flex;animation:marquee 35s linear infinite;width:max-content}
+.marquee-item{display:flex;align-items:center;gap:20px;padding:0 36px;white-space:nowrap}
+.marquee-item span{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:500;color:var(--grey-1);transition:color .3s}
+.marquee-item span:hover{color:var(--gold)}
+.marquee-dot{width:4px;height:4px;background:var(--gold);border-radius:50%;opacity:.4}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+.section{padding:100px 1.5rem;position:relative}
+.section-header{text-align:center;max-width:750px;margin:0 auto 4.5rem}
+.section-label{display:inline-flex;align-items:center;gap:12px;font-family:'Space Grotesk',sans-serif;font-size:.72rem;font-weight:500;color:var(--gold);text-transform:uppercase;letter-spacing:3px;margin-bottom:1rem}
+.section-label-line{width:36px;height:1px;background:var(--gold)}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4.5vw,3.2rem);font-weight:700;color:var(--white);margin-bottom:1rem;line-height:1.2}
+.section-desc{font-size:clamp(.9rem,1.6vw,1.05rem);color:var(--light-grey);line-height:1.8;max-width:560px;margin:0 auto}
+
+.about-section{background:linear-gradient(180deg,var(--dark-1),var(--dark-2))}
+.about-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+.about-image-side{position:relative}
+.about-image-card{border-radius:var(--radius-lg);overflow:hidden;box-shadow:0 40px 80px rgba(0,0,0,.4);border:1px solid rgba(201,169,110,.06)}
+.about-image-card img{width:100%;height:520px;object-fit:cover;object-position:top;transition:all .6s}
+.about-image-card:hover img{transform:scale(1.03)}
+.about-exp{position:absolute;bottom:-20px;right:-20px;background:var(--dark-3);border:1px solid rgba(201,169,110,.12);border-radius:var(--radius-md);padding:20px 24px;text-align:center;backdrop-filter:blur(20px)}
+.about-exp-num{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;color:var(--gold)}
+.about-exp-txt{font-size:.7rem;color:var(--light-grey);letter-spacing:1px;text-transform:uppercase}
+.about-text{font-size:.95rem;color:var(--light-grey);line-height:1.9;margin-bottom:1.3rem}
+.about-quote{position:relative;padding:24px 0 24px 24px;margin:28px 0;border-left:2px solid var(--gold)}
+.about-quote p{font-family:'Playfair Display',serif;font-size:1.2rem;font-style:italic;color:var(--white);line-height:1.6}
+.about-quote cite{display:block;margin-top:10px;font-size:.8rem;font-style:normal;color:var(--gold)}
+
+.grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{background:var(--dark-3);padding:2.2rem;border-radius:var(--radius-lg);border:1px solid rgba(201,169,110,.04);transition:all .5s cubic-bezier(.4,0,.2,1);position:relative;overflow:hidden}
+.card:hover{transform:translateY(-8px);border-color:rgba(201,169,110,.15);box-shadow:0 24px 64px rgba(0,0,0,.4)}
+.card-icon{font-size:2.2rem;margin-bottom:1.2rem;display:block;position:relative;z-index:1}
+.card-title{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:var(--white);margin-bottom:.8rem;position:relative;z-index:1}
+.card-text{color:var(--light-grey);line-height:1.7;margin-bottom:1.2rem;font-size:.88rem;position:relative;z-index:1}
+.card-features{list-style:none;margin-bottom:1.5rem;position:relative;z-index:1}
+.card-features li{padding:.5rem 0;color:var(--lighter-grey);font-size:.83rem;display:flex;align-items:center;gap:.6rem;border-bottom:1px solid rgba(255,255,255,.03)}
+.card-features li::before{content:'✓';color:var(--gold);font-weight:700;font-size:.8rem;flex-shrink:0}
+
+.books-grid{max-width:1300px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);gap:20px}
+.book-card{background:var(--dark-3);border-radius:var(--radius-lg);overflow:hidden;transition:all .5s cubic-bezier(.4,0,.2,1);border:1px solid rgba(201,169,110,.04);display:flex;flex-direction:column}
+.book-card:hover{transform:translateY(-12px);box-shadow:0 36px 80px rgba(0,0,0,.5);border-color:rgba(201,169,110,.15)}
+.book-image{width:100%;height:280px;overflow:hidden;position:relative;background:var(--dark-4);display:flex;align-items:center;justify-content:center;padding:1.2rem}
+.book-image img{max-width:100%;max-height:100%;object-fit:contain;transition:transform .5s;filter:drop-shadow(0 10px 30px rgba(0,0,0,.5))}
+.book-card:hover .book-image img{transform:scale(1.08)}
+.book-badge{position:absolute;top:.8rem;right:.8rem;background:var(--gold);color:var(--dark-1);padding:.3rem .7rem;border-radius:var(--radius-full);font-size:.6rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;z-index:2}
+.book-content{padding:1.3rem;flex:1;display:flex;flex-direction:column}
+.book-rating{margin-bottom:.4rem;font-size:.75rem}
+.book-title{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;color:var(--white);margin-bottom:.4rem;line-height:1.3}
+.book-desc{color:var(--light-grey);line-height:1.6;margin-bottom:.8rem;font-size:.78rem;flex:1}
+.book-meta{display:flex;gap:.8rem;margin-bottom:1rem;font-size:.7rem;color:var(--lighter-grey);flex-wrap:wrap}
+.book-meta strong{color:var(--gold)}
+
+.quote-section{padding:120px 40px;background:var(--dark-1);text-align:center;position:relative;overflow:hidden}
+.quote-bg-text{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Playfair Display',serif;font-size:16rem;font-weight:800;color:rgba(201,169,110,.02);white-space:nowrap;pointer-events:none}
+.quote-icon-lg{font-family:'Playfair Display',serif;font-size:3.5rem;color:var(--gold);opacity:.3;margin-bottom:24px}
+.quote-text{font-family:'Playfair Display',serif;font-size:clamp(1.4rem,3.5vw,2.5rem);font-weight:500;line-height:1.4;max-width:850px;margin:0 auto 24px;position:relative;z-index:2}
+.quote-author{font-size:.82rem;color:var(--gold);letter-spacing:3px;text-transform:uppercase}
+
+.testimonials-section{overflow:hidden}
+.testimonials-container{max-width:1200px;margin:0 auto;position:relative}
+.testimonials-carousel{position:relative;overflow:hidden;padding:2rem 0}
+.testimonials-track{display:flex;transition:transform .6s cubic-bezier(.4,0,.2,1)}
+.t-slide{min-width:100%;display:grid;grid-template-columns:repeat(3,1fr);gap:20px;padding:0 10px}
+.t-card{background:var(--dark-3);padding:2rem;border-radius:var(--radius-lg);border:1px solid rgba(201,169,110,.04);transition:all .4s;display:flex;flex-direction:column}
+.t-card:hover{border-color:rgba(201,169,110,.15);box-shadow:0 20px 50px rgba(0,0,0,.35)}
+.t-qi{font-size:1.8rem;color:rgba(201,169,110,.3);margin-bottom:.6rem;font-family:'Playfair Display',serif}
+.t-stars{display:flex;gap:2px;margin-bottom:.8rem}
+.t-stars span{color:var(--gold);font-size:.8rem}
+.t-text{font-size:.87rem;color:var(--lighter-grey);line-height:1.8;margin-bottom:1.2rem;font-style:italic;flex:1}
+.t-author{display:flex;align-items:center;gap:10px;margin-top:auto}
+.t-avatar{width:40px;height:40px;border-radius:50%;background:var(--dark-5);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:.9rem;font-weight:700;color:var(--gold);flex-shrink:0}
+.t-name{font-size:.85rem;font-weight:600;color:var(--white)}
+.t-role{font-size:.7rem;color:var(--light-grey);margin-top:1px;line-height:1.3}
+.carousel-controls{display:flex;justify-content:center;gap:12px;margin-top:2.5rem;align-items:center}
+.carousel-btn{width:44px;height:44px;border-radius:50%;background:var(--dark-4);border:1px solid rgba(201,169,110,.12);color:var(--gold);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s;font-size:1.1rem}
+.carousel-btn:hover{background:var(--gold);color:var(--dark-1);transform:scale(1.1)}
+.carousel-dots{display:flex;gap:8px;align-items:center}
+.carousel-dot{width:8px;height:8px;border-radius:50%;background:var(--dark-5);cursor:pointer;transition:all .3s}
+.carousel-dot.active{background:var(--gold);width:24px;border-radius:4px}
+
+.featured-testimonial{max-width:900px;margin:0 auto;background:var(--dark-3);border-radius:var(--radius-lg);border:1px solid rgba(201,169,110,.08);padding:2.5rem;position:relative;overflow:hidden}
+.featured-testimonial::before{content:'"';position:absolute;top:-10px;left:20px;font-family:'Playfair Display',serif;font-size:8rem;color:rgba(201,169,110,.06);line-height:1}
+.ft-label{font-family:'Space Grotesk',sans-serif;font-size:.65rem;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:1rem;display:flex;align-items:center;gap:8px}
+.ft-label::before{content:'';width:20px;height:1px;background:var(--gold)}
+.ft-text{font-size:.9rem;color:var(--lighter-grey);line-height:1.9;margin-bottom:1.5rem;position:relative;z-index:1}
+.ft-author-wrap{display:flex;align-items:center;gap:12px;position:relative;z-index:1}
+.ft-avatar{width:48px;height:48px;border-radius:50%;background:var(--dark-5);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--gold)}
+.ft-name{font-size:.9rem;font-weight:600;color:var(--white)}
+.ft-role{font-size:.75rem;color:var(--light-grey);margin-top:2px}
+.ft-carousel{position:relative;overflow:hidden}
+.ft-track{display:flex;transition:transform .6s cubic-bezier(.4,0,.2,1)}
+.ft-slide{min-width:100%;padding:0 10px}
+
+.cta-section{padding:120px 1.5rem;background:var(--dark-1);text-align:center;position:relative;overflow:hidden}
+.cta-glow{position:absolute;width:500px;height:500px;border-radius:50%;background:var(--gold);filter:blur(200px);opacity:.04;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
+.cta-content{position:relative;z-index:2}
+.cta-content h2{font-family:'Playfair Display',serif;font-size:clamp(2rem,4.5vw,3.2rem);font-weight:700;margin-bottom:1rem}
+.cta-content p{font-size:clamp(.92rem,1.6vw,1.05rem);color:var(--light-grey);margin-bottom:2.2rem;max-width:560px;margin-left:auto;margin-right:auto;line-height:1.8}
+.cta-buttons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+
+footer{background:var(--black);padding:64px 1.5rem 32px;border-top:1px solid rgba(201,169,110,.04)}
+.footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
+.footer-logo{margin-bottom:14px}
+.footer-logo img{height:40px}
+.footer-desc{font-size:.84rem;color:var(--light-grey);line-height:1.8;margin-bottom:16px}
+.footer-social{display:flex;gap:10px}
+.footer-social a{width:36px;height:36px;border-radius:var(--radius-sm);background:var(--dark-4);display:flex;align-items:center;justify-content:center;color:var(--light-grey);text-decoration:none;font-size:.85rem;transition:all .3s}
+.footer-social a:hover{background:var(--gold);color:var(--dark-1);transform:translateY(-2px)}
+.footer-col h4{font-size:.72rem;font-weight:600;color:var(--white);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer-col a{color:var(--light-grey);text-decoration:none;font-size:.84rem;transition:color .3s}
+.footer-col a:hover{color:var(--gold)}
+.footer-bottom{max-width:1200px;margin:0 auto;padding-top:24px;border-top:1px solid rgba(255,255,255,.04);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.footer-bottom p{font-size:.72rem;color:var(--grey-1)}
+.footer-bottom-links{display:flex;gap:16px}
+.footer-bottom-links a{font-size:.72rem;color:var(--grey-1);text-decoration:none;transition:color .3s}
+.footer-bottom-links a:hover{color:var(--gold)}
+
+.back-to-top{position:fixed;bottom:32px;right:32px;width:42px;height:42px;border-radius:50%;background:var(--dark-3);border:1px solid rgba(201,169,110,.12);color:var(--gold);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:100;opacity:0;visibility:hidden;transition:all .3s;font-size:1rem}
+.back-to-top.visible{opacity:1;visibility:visible}
+.back-to-top:hover{background:var(--gold);color:var(--dark-1);transform:translateY(-3px)}
+
+.reveal{opacity:0;transform:translateY(36px);transition:all .8s cubic-bezier(.4,0,.2,1)}
+.reveal.active{opacity:1;transform:translateY(0)}
+.rv-d1{transition-delay:.1s}.rv-d2{transition-delay:.2s}.rv-d3{transition-delay:.3s}
+
+@media(max-width:1200px){.grid{grid-template-columns:repeat(2,1fr)}.books-grid{grid-template-columns:repeat(3,1fr)}.t-slide{grid-template-columns:repeat(2,1fr)}.t-slide .t-card:nth-child(3){display:none}}
+@media(max-width:992px){.section{padding:72px 1.5rem}.about-grid{grid-template-columns:1fr;gap:40px}.footer-grid{grid-template-columns:1fr 1fr;gap:28px}.quote-section{padding:72px 24px}.books-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:768px){.grid{grid-template-columns:1fr}.books-grid{grid-template-columns:repeat(2,1fr)}.t-slide{grid-template-columns:1fr}.t-slide .t-card:nth-child(2),.t-slide .t-card:nth-child(3){display:none}.hero-stats{grid-template-columns:repeat(2,1fr)}.footer-grid{grid-template-columns:1fr;gap:24px}.footer-bottom{flex-direction:column;text-align:center}.cta-buttons{flex-direction:column;align-items:center}}
+@media(max-width:480px){.hero h1{font-size:1.6rem}.cta-group{flex-direction:column;align-items:center}.hero-stats{gap:8px}.books-grid{grid-template-columns:1fr}.hero-content-wrap{padding:0 1rem;padding-top:70px}.hero-badge{font-size:.6rem;padding:.4rem 1rem;letter-spacing:1.5px;gap:6px}}
 </style>
 </head>
 <body>
 
-<!-- Loading Screen -->
+<div class="noise-overlay"></div>
+<div class="scroll-progress" id="scrollProgress"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="cursor-dot" id="cursorDot"></div>
+
 <div class="loading-screen" id="loadingScreen">
-  <div class="loading-content">
-    <div class="loading-logo">Shiv Khera</div>
-    <div class="loading-quote" id="loadingQuote">"Winners don't do different things, they do things differently®"</div>
-    <div class="loading-progress">
-      <div class="loading-progress-bar" id="loadingBar"></div>
+    <div class="loading-content">
+        <div class="loading-logo"><img src="https://shivkhera.com/wp-content/uploads/2024/03/Shiv-Khera-Logo-White-2.png" alt="Shiv Khera" style="filter:invert(1)"></div>
+        <div class="loading-quote" id="loadingQuote">"Winners don't do different things, they do things differently®"</div>
+        <div class="loading-progress"><div class="loading-progress-bar" id="loadingBar"></div></div>
+        <div class="loading-text">Loading Excellence...</div>
     </div>
-    <div class="loading-text">Loading Excellence...</div>
-  </div>
 </div>
 
-<!-- Main Content - LOADED FROM START -->
-<div class="main-content" id="mainContent">
-
-<!-- Header -->
+<!-- HEADER: Logo LEFT | Nav CENTER | CTA RIGHT -->
 <header>
-  <div class="dynamic-island" id="dynamicIsland">
-    <div class="logo">Shiv Khera</div>
-    <ul class="nav-menu">
-      <li><a href="#home">Home</a></li>
-      <li><a href="#programs">Programs</a></li>
-      <li><a href="#books">Books</a></li>
-      <li><a href="#testimonials">Reviews</a></li>
-    </ul>
-    <div class="island-controls">
-      <a href="#contact" class="get-started-btn">Get Started</a>
-      <div class="island-toggle" id="islandToggle">
-        <span></span>
-      </div>
+    <div class="island-row">
+        <div class="di-island di-logo">
+            <a href="#"><img src="https://shivkhera.com/wp-content/uploads/2024/03/Shiv-Khera-Logo-White-2.png" alt="Shiv Khera"></a>
+        </div>
+
+        <div class="di-island di-nav" id="diNav">
+            <div class="di-nav-item"><a href="#about" class="di-nav-link">About</a></div>
+            <div class="di-nav-item" data-dropdown="programs">
+                <button class="di-nav-link">Programs <span class="di-nav-arrow">▼</span></button>
+                <div class="di-mega">
+                    <div class="mega-grid">
+                        <div>
+                            <div class="mega-col-title">Corporate</div>
+                            <a href="#programs" class="dd-item"><span class="dd-icon">🎯</span><span class="dd-text"><span class="dd-title">Hi-Impact Leadership</span><span class="dd-desc">Transform organizational leadership</span></span></a>
+                            <a href="#programs" class="dd-item"><span class="dd-icon">🎤</span><span class="dd-text"><span class="dd-title">Public Speaking</span><span class="dd-desc">Master impactful communication</span></span></a>
+                            <a href="#programs" class="dd-item"><span class="dd-icon">🤝</span><span class="dd-text"><span class="dd-title">Gain & Retain Customers</span><span class="dd-desc">Customer excellence strategies</span></span></a>
+                        </div>
+                        <div>
+                            <div class="mega-col-title">Education</div>
+                            <a href="#programs" class="dd-item"><span class="dd-icon">🎓</span><span class="dd-text"><span class="dd-title">Leadership for Colleges</span><span class="dd-desc">Empowering future leaders</span></span></a>
+                            <a href="#programs" class="dd-item"><span class="dd-icon">📚</span><span class="dd-text"><span class="dd-title">Leadership for Schools</span><span class="dd-desc">Building character early</span></span></a>
+                            <a href="#programs" class="dd-item"><span class="dd-icon">👨‍👩‍👧</span><span class="dd-text"><span class="dd-title">Positive Parenting</span><span class="dd-desc">Raise confident children</span></span></a>
+                        </div>
+                        <div class="mega-cta-card">
+                            <div class="mega-cta-title">Custom Programs</div>
+                            <div class="mega-cta-desc">Tailored programs with 40+ years of proven impact.</div>
+                            <a href="#contact" class="mega-cta-link">Book Consultation →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="di-nav-item"><a href="#programs" class="di-nav-link">Keynotes</a></div>
+            <div class="di-nav-item"><a href="#contact" class="di-nav-link">Consulting</a></div>
+            <div class="di-nav-item"><a href="#" class="di-nav-link">Academy</a></div>
+            <div class="di-nav-item"><a href="#" class="di-nav-link">Community</a></div>
+            <div class="di-nav-item" data-dropdown="media">
+                <button class="di-nav-link">Media <span class="di-nav-arrow">▼</span></button>
+                <div class="di-dropdown">
+                    <a href="#" class="dd-item"><span class="dd-icon">📰</span><span class="dd-text"><span class="dd-title">News</span></span></a>
+                    <a href="#" class="dd-item"><span class="dd-icon">🎙️</span><span class="dd-text"><span class="dd-title">Interviews</span></span></a>
+                    <a href="#" class="dd-item"><span class="dd-icon">📝</span><span class="dd-text"><span class="dd-title">Articles</span></span></a>
+                    <div class="dd-divider"></div>
+                    <a href="#" class="dd-item"><span class="dd-icon">📅</span><span class="dd-text"><span class="dd-title">Events</span></span></a>
+                </div>
+            </div>
+            <div class="di-nav-item" data-dropdown="resources">
+                <button class="di-nav-link">Resources <span class="di-nav-arrow">▼</span></button>
+                <div class="di-dropdown">
+                    <a href="#" class="dd-item"><span class="dd-icon">✍️</span><span class="dd-text"><span class="dd-title">Blogs</span></span></a>
+                    <a href="#" class="dd-item"><span class="dd-icon">🎬</span><span class="dd-text"><span class="dd-title">Videos</span></span></a>
+                    <a href="#testimonials" class="dd-item"><span class="dd-icon">⭐</span><span class="dd-text"><span class="dd-title">Testimonials</span></span></a>
+                </div>
+            </div>
+            <div class="di-nav-item"><a href="#" class="di-nav-link">Events</a></div>
+            <div class="di-nav-item"><a href="#books" class="di-nav-link">Books</a></div>
+        </div>
+
+        <div class="di-island di-cta">
+            <a href="#" class="di-shop" title="Shop">🛒</a>
+            <a href="#" class="di-login">Log In</a>
+            <a href="#" class="di-signup ripple-btn">Sign Up</a>
+            <div class="di-hamburger" id="diHamburger">
+                <div class="di-ham-lines"><span></span><span></span><span></span></div>
+            </div>
+        </div>
     </div>
-  </div>
 </header>
 
-<!-- Mobile Menu -->
-<div class="mobile-menu-overlay" id="mobileMenu">
-  <ul class="mobile-nav-links">
-    <li><a href="#home">Home</a></li>
-    <li><a href="#programs">Programs</a></li>
-    <li><a href="#books">Books</a></li>
-    <li><a href="#testimonials">Reviews</a></li>
-  </ul>
-  <div class="mobile-cta">
-    <a href="#contact" class="btn btn-primary">Get Started</a>
-  </div>
+<div class="mobile-fullmenu" id="mobileFullMenu">
+    <ul class="mob-nav-list">
+        <li class="mob-nav-item"><a href="#about" class="mob-nav-link">About</a></li>
+        <li class="mob-nav-item has-sub"><div class="mob-nav-link" onclick="this.parentElement.classList.toggle('open')">Programs & Workshops <span class="mob-nav-arrow">▼</span></div><ul class="mob-sub"><li><a href="#programs" class="mob-sub-link"><span class="mob-icon">🎯</span>Hi-Impact Leadership</a></li><li><a href="#programs" class="mob-sub-link"><span class="mob-icon">🎤</span>Public Speaking & Presentation</a></li><li><a href="#programs" class="mob-sub-link"><span class="mob-icon">🤝</span>Gain & Retain Customers</a></li><li class="mob-sub-divider"></li><li><a href="#programs" class="mob-sub-link"><span class="mob-icon">🎓</span>Leadership for Colleges</a></li><li><a href="#programs" class="mob-sub-link"><span class="mob-icon">📚</span>Leadership for Schools</a></li><li><a href="#programs" class="mob-sub-link"><span class="mob-icon">👨‍👩‍👧</span>Positive Parenting</a></li></ul></li>
+        <li class="mob-nav-item"><a href="#programs" class="mob-nav-link">Keynotes</a></li>
+        <li class="mob-nav-item"><a href="#contact" class="mob-nav-link">Consulting & Coaching</a></li>
+        <li class="mob-nav-item"><a href="#" class="mob-nav-link">Academy</a></li>
+        <li class="mob-nav-item"><a href="#" class="mob-nav-link">Community</a></li>
+        <li class="mob-nav-item has-sub"><div class="mob-nav-link" onclick="this.parentElement.classList.toggle('open')">PR & Media <span class="mob-nav-arrow">▼</span></div><ul class="mob-sub"><li><a href="#" class="mob-sub-link"><span class="mob-icon">📰</span>News</a></li><li><a href="#" class="mob-sub-link"><span class="mob-icon">🎙️</span>Interviews</a></li><li><a href="#" class="mob-sub-link"><span class="mob-icon">📝</span>Articles</a></li><li><a href="#" class="mob-sub-link"><span class="mob-icon">📅</span>Events</a></li></ul></li>
+        <li class="mob-nav-item has-sub"><div class="mob-nav-link" onclick="this.parentElement.classList.toggle('open')">Resources <span class="mob-nav-arrow">▼</span></div><ul class="mob-sub"><li><a href="#" class="mob-sub-link"><span class="mob-icon">✍️</span>Blogs</a></li><li><a href="#" class="mob-sub-link"><span class="mob-icon">🎬</span>Videos</a></li><li><a href="#testimonials" class="mob-sub-link"><span class="mob-icon">⭐</span>Testimonials</a></li></ul></li>
+        <li class="mob-nav-item"><a href="#" class="mob-nav-link">Events & Calendar</a></li>
+        <li class="mob-nav-item"><a href="#books" class="mob-nav-link">Books</a></li>
+        <li class="mob-nav-item"><a href="#" class="mob-nav-link">Shop 🛒</a></li>
+    </ul>
+    <div class="mob-bottom">
+        <div class="mob-auth-row"><a href="#" class="btn btn-outline">Log In</a><a href="#" class="btn btn-gold">Sign Up</a></div>
+        <a href="#contact" class="btn btn-gold" style="width:100%;justify-content:center">Contact Us →</a>
+    </div>
 </div>
 
-<!-- Hero -->
+<div class="main-content">
 <section class="hero" id="home">
-  <div class="hero-badge">International Bestselling Author & Speaker</div>
-  <h1>Transform Your Life with <span class="gradient-text">Proven Principles</span></h1>
-  <p class="hero-subtitle">Join over 13 million people worldwide who achieved extraordinary success through leadership, positive thinking, and personal excellence</p>
-  <p class="hero-tagline">"Winners don't do different things, they do things differently®"</p>
-  <div class="cta-group">
-    <a href="#programs" class="btn btn-primary">
-      <span>Explore Programs</span>
-      <span>→</span>
-    </a>
-    <a href="#books" class="btn btn-secondary">
-      <span>View Books</span>
-      <span>📚</span>
-    </a>
-  </div>
-  <div class="hero-stats">
-    <div class="stat-box">
-      <span class="stat-num">13M+</span>
-      <span class="stat-label">Copies Sold</span>
+    <div class="hero-video-bg"><iframe id="ytPlayer" src="https://www.youtube.com/embed/esCFmO3rllY?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&loop=1&playlist=esCFmO3rllY&start=108&end=642&modestbranding=1&playsinline=1&enablejsapi=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe><div class="hero-video-overlay"></div><div class="hero-video-overlay2"></div></div>
+    <div class="hero-particles" id="heroParticles"></div>
+    <div class="hero-content-wrap">
+        <div class="hero-badge"><span class="badge-dot"></span>International Bestselling Author & Speaker</div>
+        <h1>Winners don't do <span class="gold-text">different things,</span><br>they do things <span class="gold-text">differently.</span><sup>®</sup></h1>
+        <p class="hero-subtitle">Join over 15 million people worldwide who achieved extraordinary success through leadership, positive thinking, and personal excellence.</p>
+        <p class="hero-tagline">"Your positive action combined with positive thinking results in success"</p>
+        <div class="cta-group"><a href="#programs" class="btn btn-gold magnetic-wrap ripple-btn"><span>Explore Programs</span><span>→</span></a><a href="#books" class="btn btn-outline magnetic-wrap ripple-btn"><span>View Books</span><span>📚</span></a></div>
+        <div class="hero-stats"><div class="stat-box"><span class="stat-num" data-count="15">0</span><span class="stat-label">Million+ Copies Sold</span></div><div class="stat-box"><span class="stat-num" data-count="21">0</span><span class="stat-label">Languages</span></div><div class="stat-box"><span class="stat-num" data-count="87">0</span><span class="stat-label">Countries</span></div><div class="stat-box"><span class="stat-num" data-count="40">0</span><span class="stat-label">Years of Impact</span></div></div>
     </div>
-    <div class="stat-box">
-      <span class="stat-num">21</span>
-      <span class="stat-label">Languages</span>
-    </div>
-    <div class="stat-box">
-      <span class="stat-num">87</span>
-      <span class="stat-label">Countries</span>
-    </div>
-    <div class="stat-box">
-      <span class="stat-num">40+</span>
-      <span class="stat-label">Years</span>
-    </div>
-  </div>
 </section>
 
-<!-- Featured Image -->
-<section class="featured-section">
-  <div class="featured-img">
-    <img src="https://creepyroot.github.io/shivkhera/img.jpg" alt="Shiv Khera">
-  </div>
-</section>
+<div class="marquee-section"><div class="marquee-track"><div class="marquee-item"><span>Author</span><div class="marquee-dot"></div></div><div class="marquee-item"><span>Educator</span><div class="marquee-dot"></div></div><div class="marquee-item"><span>Motivational Speaker</span><div class="marquee-dot"></div></div><div class="marquee-item"><span>Business Consultant</span><div class="marquee-dot"></div></div><div class="marquee-item"><span>You Can Win</span><div class="marquee-dot"></div></div><div class="marquee-item"><span>Living With Honor</span><div class="marquee-dot"></div></div><div class="marquee-item"><span>Freedom Is Not Free</span><div class="marquee-dot"></div></div><div class="marquee-item"><span>Social Activist</span><div class="marquee-dot"></div></div><div class="marquee-item"><span>Author</span><div class="marquee-dot"></div></div><div class="marquee-item"><span>Educator</span><div class="marquee-dot"></div></div><div class="marquee-item"><span>Motivational Speaker</span><div class="marquee-dot"></div></div><div class="marquee-item"><span>Business Consultant</span><div class="marquee-dot"></div></div><div class="marquee-item"><span>You Can Win</span><div class="marquee-dot"></div></div><div class="marquee-item"><span>Living With Honor</span><div class="marquee-dot"></div></div><div class="marquee-item"><span>Freedom Is Not Free</span><div class="marquee-dot"></div></div><div class="marquee-item"><span>Social Activist</span><div class="marquee-dot"></div></div></div></div>
 
-<!-- Programs - 6 CARDS -->
-<section class="section" id="programs" style="background: linear-gradient(180deg, var(--dark-grey-2), var(--dark-grey-1));">
-  <div class="section-header">
-    <div class="section-label">Transformational Programs</div>
-    <h2 class="section-title">Master the Art of Winning</h2>
-    <p class="section-description">Comprehensive programs designed to unlock your full potential and achieve extraordinary results in every area of your life</p>
-  </div>
-  <div class="grid">
-    <div class="card">
-      <span class="card-icon">🎯</span>
-      <h3 class="card-title">Leadership Excellence</h3>
-      <p class="card-text">Develop authentic leadership skills that inspire teams, drive results, and create lasting organizational transformation through proven methodologies.</p>
-      <ul class="card-features">
-        <li>Vision & Strategic Planning</li>
-        <li>Team Building & Motivation</li>
-        <li>Decision Making Frameworks</li>
-        <li>Conflict Resolution Mastery</li>
-        <li>Communication Excellence</li>
-      </ul>
-      <a href="#contact" class="btn btn-primary">Learn More</a>
-    </div>
-    <div class="card">
-      <span class="card-icon">💡</span>
-      <h3 class="card-title">Positive Mindset Mastery</h3>
-      <p class="card-text">Transform your thinking patterns and develop the winning mindset that separates high achievers from average performers in any field.</p>
-      <ul class="card-features">
-        <li>Attitude Transformation</li>
-        <li>Limiting Beliefs Elimination</li>
-        <li>Mental Resilience Building</li>
-        <li>Positive Habit Formation</li>
-        <li>Self-Talk Mastery</li>
-      </ul>
-      <a href="#contact" class="btn btn-primary">Learn More</a>
-    </div>
-    <div class="card">
-      <span class="card-icon">🚀</span>
-      <h3 class="card-title">Success Principles</h3>
-      <p class="card-text">Master the fundamental principles of success used by top achievers worldwide to create extraordinary results and lasting impact.</p>
-      <ul class="card-features">
-        <li>Goal Setting & Achievement</li>
-        <li>Time Management Systems</li>
-        <li>Productivity Optimization</li>
-        <li>Performance Excellence</li>
-        <li>Results-Driven Action</li>
-      </ul>
-      <a href="#contact" class="btn btn-primary">Learn More</a>
-    </div>
-    <div class="card">
-      <span class="card-icon">💪</span>
-      <h3 class="card-title">Self-Confidence Building</h3>
-      <p class="card-text">Build unshakeable confidence combined with humility to overcome fears, take bold action, and achieve your highest potential in life.</p>
-      <ul class="card-features">
-        <li>Self-Esteem Development</li>
-        <li>Public Speaking Confidence</li>
-        <li>Fear & Anxiety Management</li>
-        <li>Personal Brand Excellence</li>
-        <li>Assertiveness Training</li>
-      </ul>
-      <a href="#contact" class="btn btn-primary">Learn More</a>
-    </div>
-    <div class="card">
-      <span class="card-icon">📈</span>
-      <h3 class="card-title">Professional Growth</h3>
-      <p class="card-text">Accelerate your career trajectory with proven strategies for continuous learning, skill development, and professional excellence at every level.</p>
-      <ul class="card-features">
-        <li>Career Planning & Strategy</li>
-        <li>Networking Mastery</li>
-        <li>Executive Presence</li>
-        <li>Negotiation Skills</li>
-        <li>Influence & Persuasion</li>
-      </ul>
-      <a href="#contact" class="btn btn-primary">Learn More</a>
-    </div>
-    <div class="card">
-      <span class="card-icon">🏆</span>
-      <h3 class="card-title">Peak Performance</h3>
-      <p class="card-text">Achieve extraordinary results through proven performance optimization techniques, systems, and strategies used by world-class performers.</p>
-      <ul class="card-features">
-        <li>Energy Management</li>
-        <li>Focus & Concentration</li>
-        <li>Stress Management</li>
-        <li>Work-Life Integration</li>
-        <li>Peak State Creation</li>
-      </ul>
-      <a href="#contact" class="btn btn-primary">Learn More</a>
-    </div>
-  </div>
-</section>
+<section class="section about-section" id="about"><div class="about-grid"><div class="about-image-side reveal"><div class="about-image-card spotlight"><div class="spot"></div><img src="https://shivkhera.com/wp-content/uploads/elementor/thumbs/shiv-khera-about-2-qqbatlmeod2gwdm6h8x8pzb9yk62usbdqa6lu77tpw.jpg" alt="Shiv Khera"></div><div class="about-exp float-anim"><div class="about-exp-num">40+</div><div class="about-exp-txt">Years of Excellence</div></div></div><div class="reveal rv-d2"><div class="section-label"><span class="section-label-line"></span>About Shiv Khera</div><h2 class="section-title">Transforming Lives Through <span class="gold-text">Wisdom & Action</span></h2><p class="about-text">Shiv Khera is the founder of Qualified Learning Systems Inc. USA, a globally recognized author, educator, business consultant, and one of the most sought-after motivational speakers in the world.</p><p class="about-text">An author of 18 books, including the international bestseller <strong style="color:var(--white)">"You Can Win"</strong> which has sold over 15 million copies and has been translated into 21 languages across 87 countries.</p><div class="about-quote"><p>"Your positive action combined with positive thinking results in success."</p><cite>— Shiv Khera</cite></div><a href="#programs" class="gradient-border-btn magnetic-wrap">Explore Programs →</a></div></div></section>
 
-<!-- Books - 6 BOOKS -->
-<section class="section" id="books" style="background: var(--black);">
-  <div class="section-header">
-    <div class="section-label">Bestselling Books</div>
-    <h2 class="section-title">Life-Changing Wisdom</h2>
-    <p class="section-description">Discover the books that have transformed millions of lives across 87 countries and 21 languages worldwide</p>
-  </div>
-  <div class="books-grid">
-    <div class="book-card">
-      <div class="book-image">
-        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2F736x%2Fdb%2F2b%2Fca%2Fdb2bcad16eb3e0c03c24b14628c5f47e.jpg&f=1&nofb=1" alt="You Can Win">
-        <div class="book-badge">Bestseller</div>
-      </div>
-      <div class="book-content">
-        <div class="book-rating">⭐⭐⭐⭐⭐</div>
-        <h3 class="book-title">You Can Win</h3>
-        <p class="book-desc">The international phenomenon that has inspired millions to achieve success through positive attitude, self-discipline, and proven principles of excellence.</p>
-        <div class="book-meta">
-          <span class="meta-item"><strong>13M+</strong> Copies</span>
-          <span class="meta-item"><strong>21</strong> Languages</span>
-        </div>
-        <a href="#contact" class="btn btn-primary">Get This Book</a>
-      </div>
-    </div>
-    <div class="book-card">
-      <div class="book-image">
-        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fm.media-amazon.com%2Fimages%2FI%2F71riUKE%2BySL._SL1200_.jpg&f=1&nofb=1" alt="Living With Honor">
-        <div class="book-badge">Award Winner</div>
-      </div>
-      <div class="book-content">
-        <div class="book-rating">⭐⭐⭐⭐⭐</div>
-        <h3 class="book-title">Living With Honor</h3>
-        <p class="book-desc">Discover the timeless principles of integrity, character, and honor that define true success in both personal and professional life.</p>
-        <div class="book-meta">
-          <span class="meta-item"><strong>Global</strong> Bestseller</span>
-          <span class="meta-item"><strong>15+</strong> Languages</span>
-        </div>
-        <a href="#contact" class="btn btn-primary">Get This Book</a>
-      </div>
-    </div>
-    <div class="book-card">
-      <div class="book-image">
-        <img src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fbookabook.pk%2Fcdn%2Fshop%2Fproducts%2Fd79a0be164de1d2be23bc751b672d05f_2375d97f-d90e-4a9b-a550-bb288fa05cff.jpg%3Fv%3D1626025639&f=1&nofb=1" alt="Freedom Is Not Free">
-        <div class="book-badge">Featured</div>
-      </div>
-      <div class="book-content">
-        <div class="book-rating">⭐⭐⭐⭐⭐</div>
-        <h3 class="book-title">Freedom Is Not Free</h3>
-        <p class="book-desc">A powerful exploration of freedom, responsibility, and nation-building through individual excellence and collective action for positive change.</p>
-        <div class="book-meta">
-          <span class="meta-item"><strong>National</strong> Impact</span>
-          <span class="meta-item"><strong>10+</strong> Languages</span>
-        </div>
-        <a href="#contact" class="btn btn-primary">Get This Book</a>
-      </div>
-    </div>
-    <div class="book-card">
-      <div class="book-image">
-        <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?w=800&q=80" alt="Winners Never Quit">
-        <div class="book-badge">Top Rated</div>
-      </div>
-      <div class="book-content">
-        <div class="book-rating">⭐⭐⭐⭐⭐</div>
-        <h3 class="book-title">Winners Never Quit</h3>
-        <p class="book-desc">Learn the mindset and strategies of champions who never give up, overcome obstacles, and achieve extraordinary success against all odds.</p>
-        <div class="book-meta">
-          <span class="meta-item"><strong>5M+</strong> Copies</span>
-          <span class="meta-item"><strong>18</strong> Languages</span>
-        </div>
-        <a href="#contact" class="btn btn-primary">Get This Book</a>
-      </div>
-    </div>
-    <div class="book-card">
-      <div class="book-image">
-        <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=800&q=80" alt="Building a Strong Character">
-        <div class="book-badge">Essential</div>
-      </div>
-      <div class="book-content">
-        <div class="book-rating">⭐⭐⭐⭐⭐</div>
-        <h3 class="book-title">Building a Strong Character</h3>
-        <p class="book-desc">A comprehensive guide to developing the character traits, values, and principles that create lasting success and meaningful relationships.</p>
-        <div class="book-meta">
-          <span class="meta-item"><strong>4M+</strong> Copies</span>
-          <span class="meta-item"><strong>16</strong> Languages</span>
-        </div>
-        <a href="#contact" class="btn btn-primary">Get This Book</a>
-      </div>
-    </div>
-    <div class="book-card">
-      <div class="book-image">
-        <img src="https://images.unsplash.com/photo-1495446815901-a7297e633e8d?w=800&q=80" alt="The Power of Positive Thinking">
-        <div class="book-badge">Classic</div>
-      </div>
-      <div class="book-content">
-        <div class="book-rating">⭐⭐⭐⭐⭐</div>
-        <h3 class="book-title">The Power of Positive Thinking</h3>
-        <p class="book-desc">Transform your life through the incredible power of positive thinking, optimism, and a winning attitude that attracts success and happiness.</p>
-        <div class="book-meta">
-          <span class="meta-item"><strong>6M+</strong> Copies</span>
-          <span class="meta-item"><strong>19</strong> Languages</span>
-        </div>
-        <a href="#contact" class="btn btn-primary">Get This Book</a>
-      </div>
-    </div>
-  </div>
-</section>
+<section class="section" id="programs" style="background:var(--dark-1)"><div class="aurora-bg"><div class="aurora-blob"></div><div class="aurora-blob"></div><div class="aurora-blob"></div></div><div class="section-header reveal"><div class="section-label"><span class="section-label-line"></span>Transformational Programs<span class="section-label-line"></span></div><h2 class="section-title">Master the Art of <span class="gold-text">Winning</span></h2><p class="section-desc">Comprehensive programs to unlock your full potential.</p></div><div class="grid"><div class="card glow-card tilt-card reveal rv-d1"><span class="card-icon">🎯</span><h3 class="card-title">Hi-Impact Leadership</h3><p class="card-text">Build transformational leaders who inspire teams and drive extraordinary results.</p><ul class="card-features"><li>Vision & Strategic Planning</li><li>Team Building & Motivation</li><li>Decision Making Frameworks</li><li>Communication Excellence</li></ul><a href="#contact" class="gradient-border-btn">Learn More</a></div><div class="card glow-card tilt-card reveal rv-d2"><span class="card-icon">🎤</span><h3 class="card-title">Public Speaking & Presentation</h3><p class="card-text">Master the art of impactful communication and presentation skills.</p><ul class="card-features"><li>Audience Engagement</li><li>Storytelling Mastery</li><li>Stage Presence</li><li>Persuasive Speaking</li></ul><a href="#contact" class="gradient-border-btn">Learn More</a></div><div class="card glow-card tilt-card reveal rv-d3"><span class="card-icon">🤝</span><h3 class="card-title">Gain & Retain Customers</h3><p class="card-text">Proven strategies for customer acquisition, satisfaction, and loyalty.</p><ul class="card-features"><li>Customer-First Mindset</li><li>Relationship Building</li><li>Sales Excellence</li><li>Service Recovery</li></ul><a href="#contact" class="gradient-border-btn">Learn More</a></div><div class="card glow-card tilt-card reveal rv-d1"><span class="card-icon">🎓</span><h3 class="card-title">Leadership for Colleges</h3><p class="card-text">Empowering tomorrow's leaders with character, values, and purpose.</p><ul class="card-features"><li>Self-Esteem Development</li><li>Goal Setting & Achievement</li><li>Critical Thinking</li><li>Career Readiness</li></ul><a href="#contact" class="gradient-border-btn">Learn More</a></div><div class="card glow-card tilt-card reveal rv-d2"><span class="card-icon">📚</span><h3 class="card-title">Leadership for Schools</h3><p class="card-text">Building character, confidence, and leadership from an early age.</p><ul class="card-features"><li>Values & Character Building</li><li>Positive Attitude</li><li>Anti-Bullying Programs</li><li>Student Motivation</li></ul><a href="#contact" class="gradient-border-btn">Learn More</a></div><div class="card glow-card tilt-card reveal rv-d3"><span class="card-icon">👨‍👩‍👧</span><h3 class="card-title">Positive Parenting</h3><p class="card-text">Raise confident, responsible children through positive parenting principles.</p><ul class="card-features"><li>Communication with Children</li><li>Building Self-Esteem</li><li>Setting Boundaries</li><li>Leading by Example</li></ul><a href="#contact" class="gradient-border-btn">Learn More</a></div></div></section>
 
-<!-- Testimonials - 12 TESTIMONIALS -->
-<section class="section" id="testimonials" style="background: linear-gradient(180deg, var(--dark-grey-1), var(--dark-grey-2));">
-  <div class="section-header">
-    <div class="section-label">Testimonials</div>
-    <h2 class="section-title">Lives Transformed</h2>
-    <p class="section-description">Real stories from people who achieved extraordinary success using Shiv Khera's proven principles and life-changing wisdom</p>
-  </div>
-  <div class="testimonials-grid">
-    <div class="testimonial-card">
-      <div class="quote-icon">"</div>
-      <p class="testimonial-text">Shiv Khera's teachings completely transformed my perspective on success. His practical principles helped me build a multi-million dollar business from scratch.</p>
-      <div class="author-section">
-        <div class="author-img">RK</div>
-        <div class="author-info">
-          <h4>Rajesh Kumar</h4>
-          <p>CEO, Tech Innovations</p>
-        </div>
-      </div>
-    </div>
-    <div class="testimonial-card">
-      <div class="quote-icon">"</div>
-      <p class="testimonial-text">'You Can Win' is not just a book—it's a complete blueprint for life. It taught me that success is a habit and failure is also a habit.</p>
-      <div class="author-section">
-        <div class="author-img">SP</div>
-        <div class="author-info">
-          <h4>Sarah Patel</h4>
-          <p>Entrepreneur, Singapore</p>
-        </div>
-      </div>
-    </div>
-    <div class="testimonial-card">
-      <div class="quote-icon">"</div>
-      <p class="testimonial-text">The leadership principles increased our team productivity by 300%. Shiv Khera's methods are proven and powerful for real transformation.</p>
-      <div class="author-section">
-        <div class="author-img">MJ</div>
-        <div class="author-info">
-          <h4>Michael Johnson</h4>
-          <p>Director, Fortune 500</p>
-        </div>
-      </div>
-    </div>
-    <div class="testimonial-card">
-      <div class="quote-icon">"</div>
-      <p class="testimonial-text">As a student, his message on attitude and positive thinking helped me overcome failures and achieve goals I never thought possible before.</p>
-      <div class="author-section">
-        <div class="author-img">AL</div>
-        <div class="author-info">
-          <h4>Ananya Lal</h4>
-          <p>Medical Professional</p>
-        </div>
-      </div>
-    </div>
-    <div class="testimonial-card">
-      <div class="quote-icon">"</div>
-      <p class="testimonial-text">From being unemployed to running my own consultancy—this journey wouldn't be possible without Shiv Khera's guidance and wisdom.</p>
-      <div class="author-section">
-        <div class="author-img">DW</div>
-        <div class="author-info">
-          <h4>David Williams</h4>
-          <p>Business Consultant</p>
-        </div>
-      </div>
-    </div>
-    <div class="testimonial-card">
-      <div class="quote-icon">"</div>
-      <p class="testimonial-text">His principles on living with honor and integrity changed not just my career but my entire life philosophy and value system.</p>
-      <div class="author-section">
-        <div class="author-img">PS</div>
-        <div class="author-info">
-          <h4>Priya Sharma</h4>
-          <p>Social Entrepreneur</p>
-        </div>
-      </div>
-    </div>
-    <div class="testimonial-card">
-      <div class="quote-icon">"</div>
-      <p class="testimonial-text">The self-confidence program was transformational. I went from being afraid of public speaking to delivering keynotes to thousands of people.</p>
-      <div class="author-section">
-        <div class="author-img">JL</div>
-        <div class="author-info">
-          <h4>James Lee</h4>
-          <p>Public Speaker</p>
-        </div>
-      </div>
-    </div>
-    <div class="testimonial-card">
-      <div class="quote-icon">"</div>
-      <p class="testimonial-text">Implementing Shiv Khera's success principles helped our organization achieve 250% growth in just two years. The results were extraordinary.</p>
-      <div class="author-section">
-        <div class="author-img">NK</div>
-        <div class="author-info">
-          <h4>Neha Kapoor</h4>
-          <p>VP Operations</p>
-        </div>
-      </div>
-    </div>
-    <div class="testimonial-card">
-      <div class="quote-icon">"</div>
-      <p class="testimonial-text">His approach to goal setting and achievement changed my life forever. I achieved more in one year than in the previous ten years combined.</p>
-      <div class="author-section">
-        <div class="author-img">TC</div>
-        <div class="author-info">
-          <h4>Thomas Chen</h4>
-          <p>Sales Director</p>
-        </div>
-      </div>
-    </div>
-    <div class="testimonial-card">
-      <div class="quote-icon">"</div>
-      <p class="testimonial-text">The mindset shift I experienced through his teachings was profound and lasting. Winning is about habits, discipline, and the right attitude.</p>
-      <div class="author-section">
-        <div class="author-img">MS</div>
-        <div class="author-info">
-          <h4>Maria Santos</h4>
-          <p>Executive Coach</p>
-        </div>
-      </div>
-    </div>
-    <div class="testimonial-card">
-      <div class="quote-icon">"</div>
-      <p class="testimonial-text">Reading 'You Can Win' was a turning point in my life. The principles are simple yet powerful, producing extraordinary results when applied consistently.</p>
-      <div class="author-section">
-        <div class="author-img">AK</div>
-        <div class="author-info">
-          <h4>Ahmed Khan</h4>
-          <p>Entrepreneur, Dubai</p>
-        </div>
-      </div>
-    </div>
-    <div class="testimonial-card">
-      <div class="quote-icon">"</div>
-      <p class="testimonial-text">His teachings on leadership excellence transformed how I lead teams. We've seen unprecedented engagement, productivity, innovation, and growth.</p>
-      <div class="author-section">
-        <div class="author-img">LC</div>
-        <div class="author-info">
-          <h4>Lisa Chen</h4>
-          <p>Team Lead, Microsoft</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+<section class="section" id="books" style="background:var(--dark-2)"><div class="section-header reveal"><div class="section-label"><span class="section-label-line"></span>Published Works<span class="section-label-line"></span></div><h2 class="section-title">Life-Changing <span class="gold-text">Books</span></h2><p class="section-desc">Words that have inspired millions, in 21 languages.</p></div><div class="books-grid"><div class="book-card tilt-card reveal rv-d1"><div class="book-image"><img src="https://shivkhera.com/wp-content/uploads/2024/03/You-Can-Win-Book-Covers.jpg" alt="You Can Win"><div class="book-badge">Bestseller</div></div><div class="book-content"><div class="book-rating">⭐⭐⭐⭐⭐</div><h3 class="book-title">You Can Win</h3><p class="book-desc">The international phenomenon inspiring millions through positive attitude.</p><div class="book-meta"><span><strong>15M+</strong> Copies</span><span><strong>21</strong> Languages</span></div><a href="https://www.amazon.com/You-Can-Win-Winners-Losers/dp/9382951008" target="_blank" class="gradient-border-btn" style="padding:10px 20px;font-size:.78rem">Get Book</a></div></div><div class="book-card tilt-card reveal rv-d2"><div class="book-image"><img src="https://shivkhera.com/wp-content/uploads/2024/03/You-Can-Achieve-Cover-300x300.jpg" alt="You Can Achieve More"><div class="book-badge">Popular</div></div><div class="book-content"><div class="book-rating">⭐⭐⭐⭐⭐</div><h3 class="book-title">You Can Achieve More</h3><p class="book-desc">Proven strategies to achieve more in every area of your life.</p><div class="book-meta"><span><strong>5M+</strong> Copies</span><span><strong>18</strong> Languages</span></div><a href="#contact" class="gradient-border-btn" style="padding:10px 20px;font-size:.78rem">Get Book</a></div></div><div class="book-card tilt-card reveal rv-d3"><div class="book-image"><img src="https://shivkhera.com/wp-content/uploads/2024/03/You-Can-Sell-Cover-300x300.jpg" alt="You Can Sell"><div class="book-badge">Essential</div></div><div class="book-content"><div class="book-rating">⭐⭐⭐⭐⭐</div><h3 class="book-title">You Can Sell</h3><p class="book-desc">Master the art of selling with integrity and build lasting relationships.</p><div class="book-meta"><span><strong>4M+</strong> Copies</span><span><strong>16</strong> Languages</span></div><a href="#contact" class="gradient-border-btn" style="padding:10px 20px;font-size:.78rem">Get Book</a></div></div><div class="book-card tilt-card reveal rv-d1"><div class="book-image"><img src="https://shivkhera.com/wp-content/uploads/2025/08/LIVE-WHILE-YOURE-ALIVE-BY-MR-SHIVKHERA-BOOK-COVER.png" alt="Live While You Are Alive"><div class="book-badge">New</div></div><div class="book-content"><div class="book-rating">⭐⭐⭐⭐⭐</div><h3 class="book-title">Live While You Are Alive</h3><p class="book-desc">Timeless principles for living a purposeful and meaningful life.</p><div class="book-meta"><span><strong>Global</strong> Release</span><span><strong>15+</strong> Languages</span></div><a href="#contact" class="gradient-border-btn" style="padding:10px 20px;font-size:.78rem">Get Book</a></div></div><div class="book-card tilt-card reveal rv-d2"><div class="book-image"><img src="https://m.media-amazon.com/images/I/71bdXNr3-mL._AC_UF1000,1000_QL80_.jpg" alt="Freedom Is Not Free"><div class="book-badge">Impact</div></div><div class="book-content"><div class="book-rating">⭐⭐⭐⭐⭐</div><h3 class="book-title">Freedom Is Not Free</h3><p class="book-desc">Freedom, responsibility, and nation-building through individual excellence.</p><div class="book-meta"><span><strong>National</strong> Impact</span><span><strong>10+</strong> Languages</span></div><a href="#contact" class="gradient-border-btn" style="padding:10px 20px;font-size:.78rem">Get Book</a></div></div></div></section>
 
-<!-- CTA Section -->
-<section class="cta-section" id="contact">
-  <div class="cta-content">
-    <h2>Ready to Transform Your Life?</h2>
-    <p>Join millions who have started their journey to extraordinary success and personal excellence</p>
-    <a href="#" class="cta-btn-large">Get Started Now →</a>
-  </div>
-</section>
+<section class="quote-section"><div class="quote-bg-text">INSPIRE</div><div class="aurora-bg"><div class="aurora-blob"></div><div class="aurora-blob"></div></div><div class="quote-icon-lg reveal">"</div><p class="quote-text reveal rv-d1">Under your influence, people should become better <span class="gold-text">husbands</span>, better <span class="gold-text">wives</span>, better <span class="gold-text">sons</span>, better <span class="gold-text">daughters</span>, and better <span class="gold-text">citizens.</span></p><div class="quote-author reveal rv-d2">— Shiv Khera</div></section>
 
-<!-- Footer -->
-<footer>
-  <div class="footer-grid">
-    <div class="footer-section">
-      <h4>About Shiv Khera</h4>
-      <p style="color: var(--light-grey); line-height: 1.7;">International bestselling author, educator, and motivational speaker dedicated to empowering individuals worldwide through proven principles of success.</p>
-    </div>
-    <div class="footer-section">
-      <h4>Quick Links</h4>
-      <ul class="footer-links">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#programs">Programs</a></li>
-        <li><a href="#books">Books</a></li>
-        <li><a href="#testimonials">Testimonials</a></li>
-      </ul>
-    </div>
-    <div class="footer-section">
-      <h4>Programs</h4>
-      <ul class="footer-links">
-        <li><a href="#">Leadership Excellence</a></li>
-        <li><a href="#">Coaching Services</a></li>
-        <li><a href="#">Speaking Events</a></li>
-        <li><a href="#">Corporate Training</a></li>
-      </ul>
-    </div>
-    <div class="footer-section">
-      <h4>Contact</h4>
-      <ul class="footer-links">
-        <li><a href="mailto:info@shivkhera.com">info@shivkhera.com</a></li>
-        <li><a href="tel:+911234567890">+91 123 456 7890</a></li>
-        <li><a href="#">Media Inquiries</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>Copyright © 2025 Shiv Khera. All Rights Reserved.</p>
-  </div>
-</footer>
+<section class="section testimonials-section" id="testimonials" style="background:var(--dark-2)"><div class="section-header reveal"><div class="section-label"><span class="section-label-line"></span>Testimonials<span class="section-label-line"></span></div><h2 class="section-title">Lives <span class="gold-text">Transformed</span></h2><p class="section-desc">Real stories from leaders and achievers worldwide.</p></div><div class="testimonials-container reveal rv-d1"><div class="testimonials-carousel"><div class="testimonials-track" id="testimonialsTrack"><div class="t-slide"><div class="t-card"><div class="t-qi">"</div><div class="t-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><p class="t-text">The Best of its Kind.</p><div class="t-author"><div class="t-avatar">AK</div><div><div class="t-name">Andre Keller</div><div class="t-role">Chief Executive, Zuellig Pharma, Singapore</div></div></div></div><div class="t-card"><div class="t-qi">"</div><div class="t-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><p class="t-text">One of the best motivational seminars I have ever attended.</p><div class="t-author"><div class="t-avatar">LW</div><div><div class="t-name">Lim Wei Ling</div><div class="t-role">Zuellig Pharma, Singapore</div></div></div></div><div class="t-card"><div class="t-qi">"</div><div class="t-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><p class="t-text">I only wish I had attended your program 10 years back.</p><div class="t-author"><div class="t-avatar">FA</div><div><div class="t-name">Francis Alphonso</div><div class="t-role">Head HRD, ING Barings</div></div></div></div></div><div class="t-slide"><div class="t-card"><div class="t-qi">"</div><div class="t-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><p class="t-text">100% return on my investment is an understatement.</p><div class="t-author"><div class="t-avatar">LB</div><div><div class="t-name">Linda Baker</div><div class="t-role">CPA, NJ, USA</div></div></div></div><div class="t-card"><div class="t-qi">"</div><div class="t-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><p class="t-text">Shiv has touched my mind and opened my heart to give back to society.</p><div class="t-author"><div class="t-avatar">DT</div><div><div class="t-name">Dr. Timothy Low</div><div class="t-role">CEO, Gleneagles Hospital, Singapore</div></div></div></div><div class="t-card"><div class="t-qi">"</div><div class="t-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><p class="t-text">Very self-enriching program.</p><div class="t-author"><div class="t-avatar">GS</div><div><div class="t-name">George Seah</div><div class="t-role">Singapore Armed Forces</div></div></div></div></div><div class="t-slide"><div class="t-card"><div class="t-qi">"</div><div class="t-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><p class="t-text">The best investment ever made… 3 days of knowledge will take me for another 30 years.</p><div class="t-author"><div class="t-avatar">SK</div><div><div class="t-name">Sanjeev Kumar</div><div class="t-role">Consulting Director, Hewlett Packard</div></div></div></div><div class="t-card"><div class="t-qi">"</div><div class="t-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><p class="t-text">The last 3 days were worth a lifetime of knowledge.</p><div class="t-author"><div class="t-avatar">CL</div><div><div class="t-name">Catherine Lim</div><div class="t-role">Director, Lucent Technologies</div></div></div></div><div class="t-card"><div class="t-qi">"</div><div class="t-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><p class="t-text">Having been exposed to training programs all over the world, yours was one of the best.</p><div class="t-author"><div class="t-avatar">MS</div><div><div class="t-name">Michael Stier</div><div class="t-role">Director, Lufthansa German Airlines</div></div></div></div></div><div class="t-slide"><div class="t-card"><div class="t-qi">"</div><div class="t-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><p class="t-text">These 3 days are the best investment I have made in my life.</p><div class="t-author"><div class="t-avatar">JK</div><div><div class="t-name">Jagdish Kini</div><div class="t-role">MD, Wilkinson Sword India</div></div></div></div><div class="t-card"><div class="t-qi">"</div><div class="t-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><p class="t-text">The program was brilliant.</p><div class="t-author"><div class="t-avatar">RF</div><div><div class="t-name">Rohan Fernandez</div><div class="t-role">VP, Credit Suisse, Singapore</div></div></div></div><div class="t-card"><div class="t-qi">"</div><div class="t-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div><p class="t-text">Invaluable to me in my work. Key aspects of great public speaking to practice.</p><div class="t-author"><div class="t-avatar">N</div><div><div class="t-name">Nisha</div><div class="t-role">MD, J. P. Morgan</div></div></div></div></div></div></div><div class="carousel-controls"><button class="carousel-btn" id="prevBtn">←</button><div class="carousel-dots" id="carouselDots"></div><button class="carousel-btn" id="nextBtn">→</button></div></div><div class="reveal rv-d2" style="margin-top:3rem"><div class="ft-carousel"><div class="ft-track" id="ftTrack"><div class="ft-slide"><div class="featured-testimonial"><div class="ft-label">Life-Changing Story</div><p class="ft-text">In 2003, I was married and have a 3 years old girl, I was going through very bad marriage... Then one day I decided to finish my life. While waiting for the bus my sight went on a book stall, where I saw your book YOU CAN WIN. Something magical happened and I paid money for the book and came back home. After that I managed to get divorce all by myself, came to Australia with my daughter in 2004 on student visa. Started my business just in one year. Now I am a successful business woman and I gave all your teachings to my daughter, she is graduated in law and working with a big company.</p><div class="ft-author-wrap"><div class="ft-avatar">NK</div><div><div class="ft-name">Nikki Kaur</div><div class="ft-role">Entrepreneur, Melbourne, Australia</div></div></div></div></div><div class="ft-slide"><div class="featured-testimonial"><div class="ft-label">Transformation Story</div><p class="ft-text">At the age of 41, I was released from a very long prison sentence. I must confess that during the "dark" period of my life in Prison I came across your books which began to shape my thought process, my attitude & my next course of life. Today I run a company that has almost 200 staff of which 80% consist of prisoners, handicap, single mums, senior citizens yet we serve some of the Blue Chip companies in Singapore with high standards of quality.</p><div class="ft-author-wrap"><div class="ft-avatar">AD</div><div><div class="ft-name">Anil David</div><div class="ft-role">Founder/Director, Agape Connecting People Pte Ltd</div></div></div></div></div></div></div><div class="carousel-controls" style="margin-top:1.5rem"><button class="carousel-btn" id="ftPrevBtn">←</button><div class="carousel-dots" id="ftDots"></div><button class="carousel-btn" id="ftNextBtn">→</button></div></div></section>
 
+<section class="cta-section" id="contact"><div class="cta-glow"></div><div class="aurora-bg"><div class="aurora-blob"></div><div class="aurora-blob"></div></div><div class="cta-content"><div class="section-label reveal" style="justify-content:center"><span class="section-label-line"></span>Let's Connect<span class="section-label-line"></span></div><h2 class="reveal rv-d1">Ready to <span class="gold-text">Transform</span> Your Life?</h2><p class="reveal rv-d2">Book Shiv Khera for a speaking engagement, corporate training, or bring his transformative programs to your organization.</p><div class="cta-buttons reveal rv-d3"><a href="mailto:info@shivkhera.com" class="btn btn-gold magnetic-wrap ripple-btn">Contact Now →</a><a href="#" class="gradient-border-btn magnetic-wrap">Book a Session</a></div></div></section>
+
+<footer><div class="footer-grid"><div><div class="footer-logo"><img src="https://shivkhera.com/wp-content/uploads/2024/03/Shiv-Khera-Logo-White-2.png" alt="Shiv Khera"></div><p class="footer-desc">Bestselling author, motivational speaker, and educator. Transforming lives through wisdom and positive thinking for over 40 years.</p><div class="footer-social"><a href="https://www.facebook.com/ShivKhera" target="_blank">f</a><a href="https://twitter.com/ShivKhera" target="_blank">𝕏</a><a href="https://www.youtube.com/shivkhera" target="_blank">▶</a><a href="https://www.linkedin.com/in/shivkhera/" target="_blank">in</a></div></div><div class="footer-col"><h4>Quick Links</h4><ul><li><a href="#about">About</a></li><li><a href="#programs">Programs</a></li><li><a href="#books">Books</a></li><li><a href="#testimonials">Testimonials</a></li><li><a href="#contact">Contact</a></li></ul></div><div class="footer-col"><h4>Programs</h4><ul><li><a href="#programs">Hi-Impact Leadership</a></li><li><a href="#programs">Public Speaking</a></li><li><a href="#programs">Gain & Retain Customers</a></li><li><a href="#programs">College Leadership</a></li><li><a href="#programs">Positive Parenting</a></li></ul></div><div class="footer-col"><h4>Connect</h4><ul><li><a href="https://www.shivkhera.com" target="_blank">shivkhera.com</a></li><li><a href="mailto:info@shivkhera.com">info@shivkhera.com</a></li><li><a href="#">Media Inquiries</a></li><li><a href="#">Speaking Requests</a></li><li><a href="#">Shop</a></li></ul></div></div><div class="footer-bottom"><p>© 2025 Shiv Khera. All rights reserved. "Winners don't do different things, they do things differently®"</p><div class="footer-bottom-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Sitemap</a></div></div></footer>
 </div>
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
 <script>
-const quotes = [
-  "Winners don't do different things, they do things differently®",
-  "Your positive action combined with positive thinking results in success",
-  "Success is not an accident. It is the result of your attitude and your attitude is a choice",
-  "Confidence comes from being prepared",
-  "Winners see the gain; losers see the pain",
-  "The choice is yours: accept or resist change. Either way, change will happen"
-];
+const quotes=['"Winners don\'t do different things, they do things differently®"','"Your positive action combined with positive thinking results in success"','"Success is not an accident. It is the result of your attitude"','"Confidence comes from being prepared"','"Winners see the gain; losers see the pain"','"The choice is yours: accept or resist change"'];
+const ls=document.getElementById('loadingScreen'),lb=document.getElementById('loadingBar'),qe=document.getElementById('loadingQuote');
+document.body.style.overflow='hidden';
+setTimeout(()=>{lb.style.width='100%'},100);
+let qi=0;const qInt=setInterval(()=>{qi=(qi+1)%quotes.length;qe.style.opacity='0';setTimeout(()=>{qe.textContent=quotes[qi];qe.style.opacity='1'},300)},2000);
+setTimeout(()=>{clearInterval(qInt);ls.classList.add('slide-up');setTimeout(()=>{ls.style.display='none';document.body.style.overflow='auto'},1500)},6000);
 
-const loadingScreen = document.getElementById('loadingScreen');
-const loadingBar = document.getElementById('loadingBar');
-const quoteElement = document.getElementById('loadingQuote');
+const cr=document.getElementById('cursorRing'),cd=document.getElementById('cursorDot');
+let mx=0,my=0,fx=0,fy=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cd.style.left=mx-2+'px';cd.style.top=my-2+'px'});
+function ac(){fx+=(mx-fx)*.08;fy+=(my-fy)*.08;cr.style.left=fx-12+'px';cr.style.top=fy-12+'px';requestAnimationFrame(ac)}ac();
+document.querySelectorAll('a,button,.card,.book-card,.t-card,.stat-box,.gradient-border-btn,.dd-item,.di-nav-link').forEach(el=>{el.addEventListener('mouseenter',()=>{cr.style.transform='scale(2.5)';cr.style.opacity='.4'});el.addEventListener('mouseleave',()=>{cr.style.transform='scale(1)';cr.style.opacity='1'})});
+if('ontouchstart'in window){cr.style.display='none';cd.style.display='none'}
 
-// Prevent scrolling during loading
-document.body.style.overflow = 'hidden';
+window.addEventListener('scroll',()=>{const h=document.documentElement;document.getElementById('scrollProgress').style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100+'%'});
 
-// Start progress bar
-setTimeout(() => {
-  loadingBar.style.width = '100%';
-}, 100);
+(function(){
+    const items=document.querySelectorAll('.di-nav-item[data-dropdown]');
+    let timer=null;
+    items.forEach(item=>{
+        const btn=item.querySelector('.di-nav-link');
+        const dd=item.querySelector('.di-dropdown,.di-mega');
+        btn.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();if(item.classList.contains('dd-open')){close(item)}else{closeAll();open(item)}});
+        item.addEventListener('mouseenter',()=>clearTimeout(timer));
+        item.addEventListener('mouseleave',()=>{timer=setTimeout(()=>close(item),300)});
+        if(dd){dd.addEventListener('mouseenter',()=>clearTimeout(timer));dd.addEventListener('mouseleave',()=>{timer=setTimeout(()=>close(item),300)})}
+    });
+    function open(i){i.classList.add('dd-open')}
+    function close(i){i.classList.remove('dd-open')}
+    function closeAll(){items.forEach(i=>i.classList.remove('dd-open'))}
+    document.addEventListener('click',e=>{if(!e.target.closest('.di-nav-item[data-dropdown]'))closeAll()});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape')closeAll()});
+    document.querySelectorAll('.dd-item,.mega-cta-link').forEach(l=>{l.addEventListener('click',()=>setTimeout(closeAll,50))});
+})();
 
-// Rotate quotes
-let quoteIndex = 0;
-const quoteInterval = setInterval(() => {
-  quoteIndex = (quoteIndex + 1) % quotes.length;
-  quoteElement.style.opacity = '0';
-  setTimeout(() => {
-    quoteElement.textContent = quotes[quoteIndex];
-    quoteElement.style.opacity = '1';
-  }, 300);
-}, 2000);
+const diHam=document.getElementById('diHamburger'),mfm=document.getElementById('mobileFullMenu');
+diHam.addEventListener('click',()=>{diHam.classList.toggle('active');mfm.classList.toggle('active');document.body.style.overflow=mfm.classList.contains('active')?'hidden':'auto'});
+document.querySelectorAll('.mob-sub-link,.mob-nav-item:not(.has-sub) .mob-nav-link,.mob-bottom .btn').forEach(l=>{l.addEventListener('click',()=>{diHam.classList.remove('active');mfm.classList.remove('active');document.body.style.overflow='auto'})});
 
-// Slide up after 6 seconds
-setTimeout(() => {
-  clearInterval(quoteInterval);
-  loadingScreen.classList.add('slide-up');
-  
-  // Remove loader and enable scrolling after animation
-  setTimeout(() => {
-    loadingScreen.style.display = 'none';
-    document.body.style.overflow = 'auto';
-  }, 1500);
-}, 6000);
+const pc=document.getElementById('heroParticles');
+for(let i=0;i<30;i++){const p=document.createElement('div');p.classList.add('particle');p.style.left=Math.random()*100+'%';p.style.width=Math.random()*3+1+'px';p.style.height=p.style.width;p.style.animationDuration=Math.random()*6+5+'s';p.style.animationDelay=Math.random()*8+'s';pc.appendChild(p)}
 
-// Navigation
-const islandToggle = document.getElementById('islandToggle');
-const dynamicIsland = document.getElementById('dynamicIsland');
-const mobileMenu = document.getElementById('mobileMenu');
+const revs=document.querySelectorAll('.reveal');
+function chk(){revs.forEach(el=>{if(el.getBoundingClientRect().top<window.innerHeight-60)el.classList.add('active')})}
+window.addEventListener('scroll',chk);window.addEventListener('load',chk);
 
-islandToggle.addEventListener('click', () => {
-  if (window.innerWidth > 1024) {
-    dynamicIsland.classList.toggle('expanded');
-  } else {
-    mobileMenu.classList.toggle('active');
-  }
-});
+const btt=document.getElementById('backToTop');
+window.addEventListener('scroll',()=>{btt.classList.toggle('visible',window.scrollY>500)});
 
-document.querySelectorAll('.mobile-nav-links a, .mobile-cta a').forEach(link => {
-  link.addEventListener('click', () => {
-    mobileMenu.classList.remove('active');
-  });
-});
+function animC(){document.querySelectorAll('[data-count]').forEach(c=>{const t=parseInt(c.getAttribute('data-count'));if(c.getBoundingClientRect().top<window.innerHeight&&!c.classList.contains('counted')){c.classList.add('counted');let cur=0;const inc=t/60;const tmr=setInterval(()=>{cur+=inc;if(cur>=t){cur=t;clearInterval(tmr)}c.textContent=Math.floor(cur)+'+'},25)}})}
+window.addEventListener('scroll',animC);window.addEventListener('load',()=>setTimeout(animC,6500));
 
-mobileMenu.addEventListener('click', (e) => {
-  if (e.target === mobileMenu) {
-    mobileMenu.classList.remove('active');
-  }
-});
+document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',function(e){e.preventDefault();const t=document.querySelector(this.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth',block:'start'})})});
 
-document.querySelectorAll('.nav-menu a').forEach(link => {
-  link.addEventListener('click', () => {
-    dynamicIsland.classList.remove('expanded');
-  });
-});
+document.querySelectorAll('.magnetic-wrap').forEach(btn=>{btn.addEventListener('mousemove',e=>{const r=btn.getBoundingClientRect();btn.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.2}px,${(e.clientY-r.top-r.height/2)*.2}px)`});btn.addEventListener('mouseleave',()=>{btn.style.transform='translate(0,0)'})});
+
+document.querySelectorAll('.ripple-btn').forEach(btn=>{btn.addEventListener('click',function(e){const r=document.createElement('span');r.classList.add('ripple');const rect=this.getBoundingClientRect();r.style.left=e.clientX-rect.left+'px';r.style.top=e.clientY-rect.top+'px';r.style.width=r.style.height=Math.max(rect.width,rect.height)+'px';this.appendChild(r);setTimeout(()=>r.remove(),600)})});
+
+document.querySelectorAll('.tilt-card').forEach(c=>{c.addEventListener('mousemove',e=>{const r=c.getBoundingClientRect();c.style.transform=`perspective(1000px) rotateX(${((e.clientY-r.top)/r.height-.5)*6}deg) rotateY(${((e.clientX-r.left)/r.width-.5)*-6}deg) translateY(-8px)`});c.addEventListener('mouseleave',()=>{c.style.transform='none'})});
+
+document.querySelectorAll('.spotlight').forEach(el=>{const s=el.querySelector('.spot');if(s)el.addEventListener('mousemove',e=>{const r=el.getBoundingClientRect();s.style.left=e.clientX-r.left-150+'px';s.style.top=e.clientY-r.top-150+'px'})});
+
+window.addEventListener('mousemove',e=>{const x=(e.clientX/window.innerWidth-.5)*2,y=(e.clientY/window.innerHeight-.5)*2;document.querySelectorAll('.aurora-blob').forEach((b,i)=>{b.style.transform=`translate(${x*(i+1)*8}px,${y*(i+1)*8}px)`})});
+
+(function(){var t=document.createElement('script');t.src="https://www.youtube.com/iframe_api";document.getElementsByTagName('script')[0].parentNode.insertBefore(t,document.getElementsByTagName('script')[0]);window.onYouTubeIframeAPIReady=function(){new YT.Player('ytPlayer',{events:{'onStateChange':function(e){if(e.data===YT.PlayerState.ENDED){e.target.seekTo(108);e.target.playVideo()}},'onReady':function(e){e.target.mute();e.target.playVideo()}}})}})();
+
+class Carousel{constructor(t,p,n,d,a=true,i=5000){this.track=document.getElementById(t);if(!this.track)return;this.slides=this.track.children;this.total=this.slides.length;this.cur=0;this.auto=a;this.int=i;this.timer=null;document.getElementById(p).addEventListener('click',()=>{this.prev();this.reset()});document.getElementById(n).addEventListener('click',()=>{this.next();this.reset()});const dc=document.getElementById(d);for(let j=0;j<this.total;j++){const dot=document.createElement('div');dot.classList.add('carousel-dot');if(!j)dot.classList.add('active');dot.addEventListener('click',()=>{this.goTo(j);this.reset()});dc.appendChild(dot)}this.dots=dc.querySelectorAll('.carousel-dot');let sx=0;this.track.addEventListener('touchstart',e=>{sx=e.touches[0].clientX});this.track.addEventListener('touchend',e=>{const diff=sx-e.changedTouches[0].clientX;if(Math.abs(diff)>50){diff>0?this.next():this.prev();this.reset()}});if(this.auto)this.start()}goTo(i){this.cur=i;this.track.style.transform=`translateX(-${i*100}%)`;this.dots.forEach((d,j)=>d.classList.toggle('active',j===i))}next(){this.goTo((this.cur+1)%this.total)}prev(){this.goTo((this.cur-1+this.total)%this.total)}start(){this.timer=setInterval(()=>this.next(),this.int)}reset(){clearInterval(this.timer);if(this.auto)this.start()}}
+setTimeout(()=>{new Carousel('testimonialsTrack','prevBtn','nextBtn','carouselDots',true,5000);new Carousel('ftTrack','ftPrevBtn','ftNextBtn','ftDots',true,8000)},100);
 </script>
-
 </body>
 </html>
 
